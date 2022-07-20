@@ -18,7 +18,7 @@ Anaconda/miniconda
 The scripts generate each of the figures in the paper. They are contained in '.py' files with names corresponding to the relevant figure.
 
 ### Miscellaneous
-- ['GlobalVars_.py'](GlobalVars_.py: Contains global variables used across multiple figure generation and analysis scripts.
+- ['GlobalVars_.py'](GlobalVars_.py): Contains global variables used across multiple figure generation and analysis scripts.
 - ['HelperFuncs_.py'](HelperFuncs_.py): Functions used for formatting data
 - ['run.py'](run.py): A standalone script that will generate the figures and statistical files without Snakemake or conda.
 
