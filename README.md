@@ -25,7 +25,7 @@ The scripts generate each of the figures in the paper. They are contained in `.p
 
 ## Howto
 - Install Conda or Miniconda
-- Install Snakemake and Mamba ('conda install snakemake mamba')
+- Install Snakemake and Mamba (`conda install snakemake mamba`)
 - Clone the repository 
 - Setup the environment (`snakemake --cores 1 --use-conda --conda-frontend mamba --conda-prefix .snakemake -- initializeEnvs`)
 - Perform reproducibile analysis (`snakemake -s snakefile --use-conda --keep-going -j 1 --conda-prefix .snakemake`)
