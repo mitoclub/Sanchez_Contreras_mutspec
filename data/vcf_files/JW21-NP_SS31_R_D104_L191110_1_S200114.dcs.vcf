@@ -1,0 +1,81 @@
+##fileformat=VCFv4.3
+##bwaVersion=0.7.17-r1188
+##bwaVersion=0.7.17-r1188
+##bwaVersion=0.7.17-r1188
+##bwaVersion=0.7.17-r1188
+##GATKVersion=3.8-1-0-gf15c1c3ef
+##GATKCommand=knownAlleles=[] targetIntervals=../JW21-NP_SS31_R_D104_L191110_1_S200114/JW21-NP_SS31_R_D104_L191110_1_S200114.dcs.filt.clipped.intervals LODThresholdForCleaning=5.0 consensusDeterminationModel=USE_READS entropyThreshold=0.15 maxReadsInMemory=150000 maxIsizeForMovement=3000 maxPositionalMoveAllowed=200 maxConsensuses=30 maxReadsForConsensuses=120 maxReadsForRealignment=1000000 noOriginalAlignmentTags=false nWayOut=null generate_nWayOut_md5s=false check_early=false noPGTag=false keepPGTags=false indelsFileForDebugging=null statisticsFileForDebugging=null SNPsFileForDebugging=null
+##VCF_MutposVersion=3.8-1-0-gf15c1c3ef
+##VCF_MutposCommand=/home/scottrk/Bioinformatics/Programs/Duplex-Seq-Pipeline-1.1.2/scripts/BamToMutposVCF.py -i JW21-NP_SS31_R_D104_L191110_1_S200114/Final/dcs/JW21-NP_SS31_R_D104_L191110_1_S200114.dcs.final.bam -b /home/scottrk/Bioinformatics/Genomes/mus_musculus/mm10_mtDNA_segmented_masked_regions.bed -f /home/scottrk/Bioinformatics/Genomes/mus_musculus/chrM.fa -o JW21-NP_SS31_R_D104_L191110_1_S200114/Final/dcs/JW21-NP_SS31_R_D104_L191110_1_S200114.dcs.vcf --samp_name JW21-NP_SS31_R_D104_L191110_1_S200114
+##contig=<ID=chrM,length=16299>
+##ALT=<ID=*,Description="Represents allele(s) other than observed.">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Read Depth">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allele Depth">
+##FORMAT=<ID=AF,Number=R,Type=Float,Description="Allele frequency">
+##FORMAT=<ID=NC,Number=1,Type=Integer,Description="N Count">
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	JW21-NP_SS31_R_D104_L191110_1_S200114
+chrM	82	.	C	A	.	.	.	AD:DP:AF:NC	950,1:951:9.99E-01,1.05E-03:1
+chrM	238	.	G	A	.	.	.	AD:DP:AF:NC	1091,1:1092:9.99E-01,9.16E-04:2
+chrM	719	.	G	A	.	.	.	AD:DP:AF:NC	806,1:807:9.99E-01,1.24E-03:1
+chrM	2373	.	G	A	.	.	.	AD:DP:AF:NC	446,1:447:9.98E-01,2.24E-03:0
+chrM	2464	.	G	A	.	.	.	AD:DP:AF:NC	418,1:419:9.98E-01,2.39E-03:1
+chrM	2586	.	G	A	.	.	.	AD:DP:AF:NC	588,1:589:9.98E-01,1.70E-03:3
+chrM	2835	.	G	A	.	.	.	AD:DP:AF:NC	412,1:413:9.98E-01,2.42E-03:2
+chrM	2836	.	G	A	.	.	.	AD:DP:AF:NC	415,1:416:9.98E-01,2.40E-03:1
+chrM	2866	.	T	C	.	.	.	AD:DP:AF:NC	529,1:530:9.98E-01,1.89E-03:5
+chrM	2868	.	G	A	.	.	.	AD:DP:AF:NC	535,1:536:9.98E-01,1.87E-03:2
+chrM	3087	.	G	A	.	.	.	AD:DP:AF:NC	901,1:902:9.99E-01,1.11E-03:3
+chrM	3321	.	G	A	.	.	.	AD:DP:AF:NC	1044,1:1045:9.99E-01,9.57E-04:4
+chrM	4051	.	CA	C	.	.	.	AD:DP:AF:NC	516,1:517:9.98E-01,1.93E-03:1
+chrM	4188	.	G	A	.	.	.	AD:DP:AF:NC	684,1:685:9.99E-01,1.46E-03:0
+chrM	4386	.	C	T	.	.	.	AD:DP:AF:NC	735,1:736:9.99E-01,1.36E-03:0
+chrM	4415	.	G	A	.	.	.	AD:DP:AF:NC	799,1:800:9.99E-01,1.25E-03:0
+chrM	4440	.	G	A	.	.	.	AD:DP:AF:NC	784,1:785:9.99E-01,1.27E-03:2
+chrM	4797	.	G	A	.	.	.	AD:DP:AF:NC	649,1:650:9.98E-01,1.54E-03:2
+chrM	5005	.	G	A	.	.	.	AD:DP:AF:NC	705,1:706:9.99E-01,1.42E-03:2
+chrM	5171	.	GA	G	.	.	.	AD:DP:AF:NC	159,8:167:9.52E-01,4.79E-02:4
+chrM	5604	.	G	A	.	.	.	AD:DP:AF:NC	1418,1:1419:9.99E-01,7.05E-04:8
+chrM	5754	.	G	A	.	.	.	AD:DP:AF:NC	1340,1:1341:9.99E-01,7.46E-04:2
+chrM	6042	.	G	A	.	.	.	AD:DP:AF:NC	1334,1:1335:9.99E-01,7.49E-04:3
+chrM	6450	.	G	A	.	.	.	AD:DP:AF:NC	1168,1:1169:9.99E-01,8.55E-04:4
+chrM	6549	.	A	G	.	.	.	AD:DP:AF:NC	1119,1:1120:9.99E-01,8.93E-04:6
+chrM	7383	.	CA	C	.	.	.	AD:DP:AF:NC	1085,1:1086:9.99E-01,9.21E-04:2
+chrM	7556	.	G	T	.	.	.	AD:DP:AF:NC	1088,46:1134:9.59E-01,4.06E-02:4
+chrM	8347	.	CTTA	C	.	.	.	AD:DP:AF:NC	843,1:844:9.99E-01,1.18E-03:3
+chrM	8861	.	A	AT	.	.	.	AD:DP:AF:NC	777,1:778:9.99E-01,1.29E-03:6
+chrM	8889	.	G	A	.	.	.	AD:DP:AF:NC	853,1:854:9.99E-01,1.17E-03:1
+chrM	9255	.	G	A	.	.	.	AD:DP:AF:NC	779,1:780:9.99E-01,1.28E-03:1
+chrM	10567	.	C	T	.	.	.	AD:DP:AF:NC	849,1:850:9.99E-01,1.18E-03:4
+chrM	10727	.	C	T	.	.	.	AD:DP:AF:NC	863,1:864:9.99E-01,1.16E-03:2
+chrM	11233	.	C	T	.	.	.	AD:DP:AF:NC	1033,1:1034:9.99E-01,9.67E-04:3
+chrM	11239	.	G	A	.	.	.	AD:DP:AF:NC	1037,1:1038:9.99E-01,9.63E-04:4
+chrM	11512	.	C	G	.	.	.	AD:DP:AF:NC	719,1:720:9.99E-01,1.39E-03:2
+chrM	12252	.	G	A	.	.	.	AD:DP:AF:NC	918,1:919:9.99E-01,1.09E-03:3
+chrM	13188	.	C	T	.	.	.	AD:DP:AF:NC	1009,1:1010:9.99E-01,9.90E-04:3
+chrM	14083	.	G	A	.	.	.	AD:DP:AF:NC	931,1:932:9.99E-01,1.07E-03:1
+chrM	14316	.	G	A	.	.	.	AD:DP:AF:NC	1325,1:1326:9.99E-01,7.54E-04:3
+chrM	14436	.	G	A	.	.	.	AD:DP:AF:NC	1495,1:1496:9.99E-01,6.68E-04:5
+chrM	14482	.	G	A	.	.	.	AD:DP:AF:NC	1446,1:1447:9.99E-01,6.91E-04:2
+chrM	14674	.	G	A	.	.	.	AD:DP:AF:NC	1216,1:1217:9.99E-01,8.22E-04:9
+chrM	14712	.	G	A	.	.	.	AD:DP:AF:NC	1211,1:1212:9.99E-01,8.25E-04:5
+chrM	14810	.	CT	C	.	.	.	AD:DP:AF:NC	1076,2:1078:9.98E-01,1.86E-03:3
+chrM	15316	.	T	C	.	.	.	AD:DP:AF:NC	668,32:700:9.54E-01,4.57E-02:2
+chrM	15462	.	T	C	.	.	.	AD:DP:AF:NC	959,1:960:9.99E-01,1.04E-03:2
+chrM	15469	.	C	T	.	.	.	AD:DP:AF:NC	975,1:976:9.99E-01,1.02E-03:6
+chrM	15524	.	T	C	.	.	.	AD:DP:AF:NC	1070,1:1071:9.99E-01,9.34E-04:3
+chrM	15536	.	C	T	.	.	.	AD:DP:AF:NC	1026,1:1027:9.99E-01,9.74E-04:3
+chrM	15667	.	C	T	.	.	.	AD:DP:AF:NC	1149,1:1150:9.99E-01,8.70E-04:6
+chrM	15678	.	G	A	.	.	.	AD:DP:AF:NC	1198,1:1199:9.99E-01,8.34E-04:2
+chrM	15727	.	G	A	.	.	.	AD:DP:AF:NC	1269,3:1272:9.98E-01,2.36E-03:2
+chrM	15760	.	G	A	.	.	.	AD:DP:AF:NC	1298,1:1299:9.99E-01,7.70E-04:2
+chrM	15766	.	G	A	.	.	.	AD:DP:AF:NC	1322,1:1323:9.99E-01,7.56E-04:5
+chrM	15866	.	G	A	.	.	.	AD:DP:AF:NC	1151,1:1152:9.99E-01,8.68E-04:7
+chrM	15877	.	G	A	.	.	.	AD:DP:AF:NC	1118,2:1120:9.98E-01,1.79E-03:3
+chrM	15926	.	T	C	.	.	.	AD:DP:AF:NC	1593,1:1594:9.99E-01,6.27E-04:3
+chrM	15928	.	G	A	.	.	.	AD:DP:AF:NC	1596,1:1597:9.99E-01,6.26E-04:9
+chrM	15930	.	C	T	.	.	.	AD:DP:AF:NC	1592,1:1593:9.99E-01,6.28E-04:5
+chrM	15958	.	C	G	.	.	.	AD:DP:AF:NC	1686,1:1687:9.99E-01,5.93E-04:6
+chrM	15966	.	G	A	.	.	.	AD:DP:AF:NC	1684,1:1685:9.99E-01,5.93E-04:1
+chrM	15993	.	G	A	.	.	.	AD:DP:AF:NC	1588,1:1589:9.99E-01,6.29E-04:8
+chrM	16012	.	G	A	.	.	.	AD:DP:AF:NC	1548,1:1549:9.99E-01,6.46E-04:10
+chrM	16092	.	A	AC	.	.	.	AD:DP:AF:NC	693,1:694:9.99E-01,1.44E-03:5
