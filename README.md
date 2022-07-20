@@ -7,7 +7,7 @@ Snakemake
 Anaconda/miniconda
 
 ### Data Extraction
-- ['compile_data.py']: Reads the individual data and/or summary files and compiles them into '.csv' files used for plotting (stored in the 'data/imported_data' subdirectory).
+- ['compile_data.py'](compile_data.py): Reads the individual data and/or summary files and compiles them into '.csv' files used for plotting (stored in the 'data/imported_data' subdirectory).
 
 ### Statistical Analysis
 - ['compute_stats.py']: Computes p-values used to establish significance and then reports them as '.csv' files for each figure or subfigure. Specific figure is indicated in the file name (stored in the 'data/stats/' subdirectory)
