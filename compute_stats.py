@@ -26,19 +26,18 @@ def Fig1A_D_stats(data, mut_class, output=None):
         young_data = data.query("Age=='Young' & Tissue==@tissue & Treatment=='NT'")
         old_data = data.query("Age=='Old' & Tissue==@tissue & Treatment=='NT'")
         
-        F_stat, p_value = stats.ttest_ind(young_data[mut_class], 
-                                          old_data[mut_class], 
-                                          equal_var=False
-                                          )
-        
+        F_stat, p_value = stats.ttest_ind(young_data[mut_class], old_data[mut_class], 
+                                          equal_var=False)
         p_value_dict[tissue].append(p_value)
     
     if output != None:
+        
         if os.path.isdir("data/stats/") == False:
             os.mkdir("data/stats/")
+        
         pvalues = pd.DataFrame(p_value_dict).to_csv(output)
         
-    return pvalues
+    return p_value_dict
 
 
 def anova_df(df, cohort, mut_class):
@@ -49,14 +48,8 @@ def anova_df(df, cohort, mut_class):
         sub_data = df.query("Age==@cohort & Treatment=='NT' & Tissue==@tissue & Class==@mut_class")
         data.append(sub_data['Frequency'])
 
-    f_stat, p_val = stats.f_oneway(data[0], 
-                                   data[1], 
-                                   data[2], 
-                                   data[3], 
-                                   data[4], 
-                                   data[5], 
-                                   data[6], 
-                                   data[7])
+    f_stat, p_val = stats.f_oneway(data[0], data[1], data[2], data[3], data[4], 
+                                   data[5], data[6], data[7])
     
     tukey_data = df.query("Age==@cohort & Treatment=='NT' & Class==@mut_class")
     tukey = pairwise_tukeyhsd(endog=tukey_data['Frequency'], 
@@ -94,15 +87,15 @@ def heatmap_stats(data, cohort, mut_class, output=None):
         pvals_df.to_csv(output)
         
     return pvals_df
-
-
-def Fig3_stats(lib_loc):
+  
+    
+def Fig2C_stats(lib_loc):
     
     r_source = robjects.r['source']
     
     if os.path.isdir('data/stats/') ==  False:
         os.mkdir('data/stats/')
-    output = open("data/stats/Figure_3_ratio_statistics.csv", 'w')
+    output = open("data/stats/Figure_2_ratio_statistics.csv", 'w')
         
     r_source('fold_changes.R')
     
@@ -142,7 +135,7 @@ def Fig6_stats(lib_loc):
     output.close()
 
 
-def Supp_Fig_8_stats(clone_freq_df, output):
+def Supp_Fig_7_stats(clone_freq_df, output):
     
     pvalue_list = []
 
@@ -206,7 +199,7 @@ if __name__ == "__main__":
     heatmap_stats(summary_data_long, "Young", 'Total_InDel_Freq', "data/stats/Figure_1D_Young_heatmap_stats.csv")
     heatmap_stats(summary_data_long, "Old", 'Total_InDel_Freq', "data/stats/Figure_1D_Old_heatmap_stats.csv")
     
-    # Figure 2 statistics
+    # Figure 2A-B statistics
     for age in ['Young', 'Old']:
 
         for i, mut_class in enumerate(mut_type):
@@ -214,15 +207,15 @@ if __name__ == "__main__":
             heatmap_stats(summary_data_long, age, mut_class, "data/stats/Figure_2_" + 
                           age + "_" + mut_type_conv[mut_class] + "_heatmap_stats.csv")
 
-    # Figure 3 statistics
-    Fig3_stats(R_lib_path) # change package location as necessary
+    # Figure 2C statistics
+    Fig2C_stats(R_lib_path) # change package location as necessary
     
-    # Figure 4 statistics
+    # Figure 3 statistics
     Fig4A_B_stats(final_clone_data, "Percent_Clone", "data/stats/Figure_4A_statistics.csv")        
     Fig4A_B_stats(final_clone_data, "Clone_Freq", "data/stats/Figure_4B_statistics.csv")
     
-    #Figure 6 statistics
+    #Figure 5 statistics
     Fig6_stats(R_lib_path)
     
     #Supplemental Figure 8 statistics
-    Supp_Fig_8_stats(final_clone_data, "data/stats/Supplemental_Figure_8_statistics.csv")
+    Supp_Fig_7_stats(final_clone_data, "data/stats/Supplemental_Figure_7_statistics.csv")

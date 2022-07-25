@@ -7,15 +7,14 @@ rule all:
         "figures/Figure_3.png",
         "figures/Figure_4.png",
         "figures/Figure_5.png",
-        "figures/Figure_6.png",
         "figures/Supp_Figure_1.png",
         "figures/Supp_Figure_2.png",
         "figures/Supp_Figure_3.png",
         "figures/Supp_Figure_4.png",
+        "figures/Supp_Figure_7.png",
         "figures/Supp_Figure_8.png",
         "figures/Supp_Figure_9.png",
         "figures/Supp_Figure_10.png",
-        "figures/Supp_Figure_11.png",
     
         "data/stats/Figure_1A_statistics.csv",
         "data/stats/Figure_1D_statistics.csv",
@@ -35,11 +34,11 @@ rule all:
         "data/stats/Figure_2_Young_CA_GT_heatmap_stats.csv",
         "data/stats/Figure_2_Young_CG_GC_heatmap_stats.csv",
         "data/stats/Figure_2_Young_CT_GA_heatmap_stats.csv",
-        "data/stats/Figure_3_ratio_statistics.csv",
+        "data/stats/Figure_2_ratio_statistics.csv",
         "data/stats/Figure_4A_statistics.csv",
         "data/stats/Figure_4B_statistics.csv",
         "data/stats/Figure_6_Dunnett_statistics.csv",
-        "data/stats/Supplemental_Figure_8_statistics.csv",
+        "data/stats/Supplemental_Figure_7_statistics.csv",
         
         "data/imported_data/summary_data_wide.csv",
         "data/imported_data/summary_data_tidy.csv",
@@ -70,6 +69,7 @@ rule initializeFullEnv:
         echo "Initializing envs"
         touch full.initialized
         """
+        
 rule makeDirs:
     output:
         temp(touch(".dirsMade")) 
@@ -79,6 +79,7 @@ rule makeDirs:
         data/imported_data \
         figures
         """
+        
 rule compile_data:
     output:
         "data/imported_data/summary_data_wide.csv",
@@ -117,11 +118,11 @@ rule compute_stats:
         "data/stats/Figure_2_Young_CA_GT_heatmap_stats.csv",
         "data/stats/Figure_2_Young_CG_GC_heatmap_stats.csv",
         "data/stats/Figure_2_Young_CT_GA_heatmap_stats.csv",
-        "data/stats/Figure_3_ratio_statistics.csv",
+        "data/stats/Figure_2_ratio_statistics.csv",
         "data/stats/Figure_4A_statistics.csv",
         "data/stats/Figure_4B_statistics.csv",
         "data/stats/Figure_6_Dunnett_statistics.csv",
-        "data/stats/Supplemental_Figure_8_statistics.csv"
+        "data/stats/Supplemental_Figure_7_statistics.csv"
     priority:
         1
     shell:
@@ -141,6 +142,7 @@ rule Figure_1:
         """
         python3 Figure_1.py
         """
+        
 rule Figure_2:
     input:
         "data/imported_data/summary_data_wide.csv",
@@ -153,11 +155,11 @@ rule Figure_2:
         """
         python3 Figure_2.py
         """
-
+        
 rule Figure_3:
     input:
-        "data/imported_data/summary_data_wide.csv",
-        "data/imported_data/summary_data_tidy.csv"
+        "data/imported_data/mut_file_data.csv",
+        "data/imported_data/summary_clone_data.csv"
     output:
         "figures/Figure_3.png"
     conda:
@@ -182,8 +184,8 @@ rule Figure_4:
 
 rule Figure_5:
     input:
-        "data/imported_data/mut_file_data.csv",
-        "data/imported_data/summary_clone_data.csv"
+        "data/imported_data/summary_data_wide.csv",
+        "data/imported_data/summary_data_tidy.csv"
     output:
         "figures/Figure_5.png"
     conda:
@@ -191,19 +193,6 @@ rule Figure_5:
     shell:
         """
         python3 Figure_5.py
-        """
-
-rule Figure_6:
-    input:
-        "data/imported_data/summary_data_wide.csv",
-        "data/imported_data/summary_data_tidy.csv"
-    output:
-        "figures/Figure_6.png"
-    conda:
-        "Mouse_mtDNA_analysis_env.yaml"
-    shell:
-        """
-        python3 Figure_6.py
         """
 
 rule Supplemental_Figure_1:
@@ -246,6 +235,16 @@ rule Supplemental_Figure_4:
         python3 Supp_Figure_4.py
         """
         
+rule Supplemental_Figure_7:
+    output:
+        "figures/Supp_Figure_7.png"
+    conda:
+        "Mouse_mtDNA_analysis_env.yaml"
+    shell:
+        """
+        python3 Supp_Figure_7.py
+        """
+        
 rule Supplemental_Figure_8:
     output:
         "figures/Supp_Figure_8.png"
@@ -274,14 +273,4 @@ rule Supplemental_Figure_10:
     shell:
         """
         python3 Supp_Figure_10.py
-        """
-        
-rule Supplemental_Figure_11:
-    output:
-        "figures/Supp_Figure_11.png"
-    conda:
-        "Mouse_mtDNA_analysis_env.yaml"
-    shell:
-        """
-        python3 Supp_Figure_11.py
         """

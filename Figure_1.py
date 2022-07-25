@@ -88,12 +88,11 @@ if __name__ == '__main__':
         data.to_csv("data/imported_data/summary_data_tidy.csv")
     else:
         data = pd.read_csv("data/imported_data/summary_data_tidy.csv")
-        data = data.query("Treatment=='NT'")
 
     fig, axd, axd2 = setup_figure()
 
-    mutation_bar("Frequency", data.query("Class=='Total_SNV_Freq'"), axd['A'])
-    mutation_bar("Frequency", data.query("Class=='Total_InDel_Freq'"), axd2['A'])
+    mutation_bar("Frequency", data.query("Treatment=='NT' & Class=='Total_SNV_Freq'"), axd['A'])
+    mutation_bar("Frequency", data.query("Treatment=='NT' & Class=='Total_InDel_Freq'"), axd2['A'])
 
     if not os.path.isfile("data/stats/Figure_1A_Young_stats.csv"):
         if not os.path.isdir("data/stats/"):
