@@ -39,13 +39,13 @@ print("Generating Supplemental Figure 4")
 exec(open("Supp_Figure_4.py").read())
 
 print("Generating Supplemental Figure 8")
-exec(open("Supp_Figure_8.py").read())
+exec(open("Supp_Figure_7.py").read())
 
 print("Generating Supplemental Figure 9")
-exec(open("Supp_Figure_9.py").read())
+exec(open("Supp_Figure_8.py").read())
 
 print("Generating Supplemental Figure 10")
-exec(open("Supp_Figure_10.py").read())
+exec(open("Supp_Figure_9.py").read())
 
 print("Generating Supplemental Figure 11")
-exec(open("Supp_Figure_11.py").read())
+exec(open("Supp_Figure_10.py").read())
