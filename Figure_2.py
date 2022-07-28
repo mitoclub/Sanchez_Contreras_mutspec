@@ -207,14 +207,15 @@ if __name__ == '__main__':
         data = data.query("Treatment=='NT'").sort_values(by=['Tissue'],
                                                          key=lambda x: x.map(custom_dict))
 
-    if not os.path.isfile("data/stats/Figure_3_ratio_statistics.csv"):
+    if not os.path.isfile("data/stats/Figure_2_ratio_statistics.csv"):
 
         if not os.path.isdir("data/stats/"):
             os.mkdir("data/stats/")
         else:
-            Fig3_stats(R_lib_path)
+            Fig2C_stats(R_lib_path)
+            ratio_df = mod_ratios("data/stats/Figure_2_ratio_statistics.csv")
     else:
-        ratio_df = mod_ratios("data/stats/Figure_3_ratio_statistics.csv")
+        ratio_df = mod_ratios("data/stats/Figure_2_ratio_statistics.csv")
 
     sort_dict = {'K': 0, 'L': 1, 'EC': 3, 'R': 4, 'Hi': 5, 'C': 6, 'M': 7, 'He': 8}
     ratio_df.sort_values(by=['Tissue'], key=lambda x: x.map(sort_dict),

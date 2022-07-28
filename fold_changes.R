@@ -20,4 +20,4 @@ for (i in unique(summary_data_tidy$Class)[3:8]){
                  qVal=ratio_data$p.value))
   }
 }
-write.csv(x=final_df, file="data/stats/Figure_3_ratio_statistics.csv")
+write.csv(x=final_df, file="data/stats/Figure_2_ratio_statistics.csv")

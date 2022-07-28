@@ -95,11 +95,11 @@ def Fig2C_stats(lib_loc):
     
     if os.path.isdir('data/stats/') ==  False:
         os.mkdir('data/stats/')
-    output = open("data/stats/Figure_2_ratio_statistics.csv", 'w')
+    #output = open("data/stats/Figure_2_ratio_statistics.csv", 'w')
         
     r_source('fold_changes.R')
     
-    output.close()
+    #output.close()
 
 
 def Fig4A_B_stats(data, column_name, output):
