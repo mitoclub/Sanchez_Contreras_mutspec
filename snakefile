@@ -11,6 +11,8 @@ rule all:
         "figures/Supp_Figure_2.png",
         "figures/Supp_Figure_3.png",
         "figures/Supp_Figure_4.png",
+        "figures/Supp_Figure_5.png",
+        "figures/Supp_Figure_6.png",
         "figures/Supp_Figure_7.png",
         "figures/Supp_Figure_8.png",
         "figures/Supp_Figure_9.png",
@@ -233,6 +235,26 @@ rule Supplemental_Figure_4:
     shell:
         """
         python3 Supp_Figure_4.py
+        """
+
+rule Supplemental_Figure_5:
+    output:
+        "figures/Supp_Figure_5.png"
+    conda:
+        "Mouse_mtDNA_analysis_env.yaml"
+    shell:
+        """
+        python3 Supp_Figure_5.py
+        """
+        
+rule Supplemental_Figure_6:
+    output:
+        "figures/Supp_Figure_6.png"
+    conda:
+        "Mouse_mtDNA_analysis_env.yaml"
+    shell:
+        """
+        python3 Supp_Figure_6.py
         """
         
 rule Supplemental_Figure_7:

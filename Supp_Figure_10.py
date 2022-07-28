@@ -63,4 +63,5 @@ ax.tick_params('y', labelsize=14)
 if not os.path.isdir("figures"):
     os.mkdir("figures/")
 
-fig.savefig('figures/Supp_Figure_10.png', dpi=600, facecolor='white')
+fig.savefig('figures/Supp_Figure_10.png', dpi=600, facecolor='white',
+            bbox_inches='tight')

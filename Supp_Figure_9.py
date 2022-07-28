@@ -46,4 +46,5 @@ if __name__ == "__main__":
     if not os.path.isdir("figures"):
         os.mkdir("figures/")
         
-    fig.savefig('figures/Supp_Figure_9.png', dpi=600, facecolor='white')    
+    fig.savefig('figures/Supp_Figure_9.png', dpi=600, facecolor='white', 
+                bbox_inches='tight')    
