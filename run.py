@@ -20,32 +20,38 @@ exec(open("Figure_2.py").read())
 print("Generating Figure 3.")
 exec(open("Figure_3.py").read())
 
-print("Generating Figure 4")
+print("Generating Figure 4.")
 exec(open("Figure_4.py").read())
 
-print("Generating Figure 5")
+print("Generating Figure 5.")
 exec(open("Figure_5.py").read())
 
-print("Generating Supplemental Figure 1")
+print("Generating Supplemental Figure 1.")
 exec(open("Supp_Figure_1.py").read())
 
-print("Generating Supplemental Figure 2")
+print("Generating Supplemental Figure 2.")
 exec(open("Supp_Figure_2.py").read())
 
-print("Generating Supplemental Figure 3")
+print("Generating Supplemental Figure 3.")
 exec(open("Supp_Figure_3.py").read())
 
-print("Generating Supplemental Figure 4")
+print("Generating Supplemental Figure 4.")
 exec(open("Supp_Figure_4.py").read())
 
-print("Generating Supplemental Figure 8")
+print("Generating Supplemental Figure 5.")
+exec(open("Supp_Figure_5.py").read())
+
+print("Generating Supplemental Figure 6.")
+exec(open("Supp_Figure_6.py").read())
+
+print("Generating Supplemental Figure 7.")
 exec(open("Supp_Figure_7.py").read())
 
-print("Generating Supplemental Figure 9")
+print("Generating Supplemental Figure 8.")
 exec(open("Supp_Figure_8.py").read())
 
-print("Generating Supplemental Figure 10")
+print("Generating Supplemental Figure 9.")
 exec(open("Supp_Figure_9.py").read())
 
-print("Generating Supplemental Figure 11")
+print("Generating Supplemental Figure 10.")
 exec(open("Supp_Figure_10.py").read())
