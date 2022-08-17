@@ -140,3 +140,4 @@ if __name__ == "__main__":
         os.mkdir("figures/")
 
     fig.savefig('figures/Supp_Figure_3.png', dpi=600, facecolor='white')
+    fig.savefig('figures/Supp_Figure_3.pdf', dpi=600, facecolor='white')

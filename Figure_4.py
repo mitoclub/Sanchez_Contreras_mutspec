@@ -123,3 +123,5 @@ if __name__ == '__main__':
 
     fig.savefig("figures/Figure_4.png", facecolor='white', dpi=600, 
                 bbox_inches='tight')
+    fig.savefig("figures/Figure_4.pdf", facecolor='white', dpi=600, 
+                bbox_inches='tight')

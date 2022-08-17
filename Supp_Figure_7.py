@@ -87,3 +87,4 @@ if not os.path.isdir("figures"):
     os.mkdir("figures/")
 
 fig.savefig("figures/Supp_Figure_7.png", facecolor='white', dpi=600)
+fig.savefig("figures/Supp_Figure_7.pdf", facecolor='white', dpi=600)

@@ -93,3 +93,5 @@ if __name__ == "__main__":
 
     fig.savefig('figures/Supp_Figure_1.png', dpi=600, facecolor='white', 
                 bbox_inches='tight')
+    fig.savefig('figures/Supp_Figure_1.pdf', dpi=600, facecolor='white', 
+                bbox_inches='tight')

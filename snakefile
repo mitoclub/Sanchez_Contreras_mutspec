@@ -17,6 +17,22 @@ rule all:
         "figures/Supp_Figure_8.png",
         "figures/Supp_Figure_9.png",
         "figures/Supp_Figure_10.png",
+        
+        "figures/Figure_1.pdf",
+        "figures/Figure_2.pdf",
+        "figures/Figure_3.pdf",
+        "figures/Figure_4.pdf",
+        "figures/Figure_5.pdf",
+        "figures/Supp_Figure_1.pdf",
+        "figures/Supp_Figure_2.pdf",
+        "figures/Supp_Figure_3.pdf",
+        "figures/Supp_Figure_4.pdf",
+        "figures/Supp_Figure_5.pdf",
+        "figures/Supp_Figure_6.pdf",
+        "figures/Supp_Figure_7.pdf",
+        "figures/Supp_Figure_8.pdf",
+        "figures/Supp_Figure_9.pdf",
+        "figures/Supp_Figure_10.pdf",
     
         "data/stats/Figure_1A_statistics.csv",
         "data/stats/Figure_1D_statistics.csv",
@@ -137,6 +153,7 @@ rule Figure_1:
         "data/imported_data/summary_data_wide.csv",
         "data/imported_data/summary_data_tidy.csv"
     output: 
+        "figures/Figure_1.pdf",
         "figures/Figure_1.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -150,6 +167,7 @@ rule Figure_2:
         "data/imported_data/summary_data_wide.csv",
         "data/imported_data/summary_data_tidy.csv"
     output:
+        "figures/Figure_2.pdf",
         "figures/Figure_2.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -163,6 +181,7 @@ rule Figure_3:
         "data/imported_data/mut_file_data.csv",
         "data/imported_data/summary_clone_data.csv"
     output:
+        "figures/Figure_3.pdf",
         "figures/Figure_3.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -176,6 +195,7 @@ rule Figure_4:
         "data/imported_data/mut_file_data.csv",
         "data/imported_data/summary_clone_data.csv"
     output:
+        "figures/Figure_4.pdf",
         "figures/Figure_4.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -189,6 +209,7 @@ rule Figure_5:
         "data/imported_data/summary_data_wide.csv",
         "data/imported_data/summary_data_tidy.csv"
     output:
+        "figures/Figure_5.pdf",
         "figures/Figure_5.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -199,6 +220,7 @@ rule Figure_5:
 
 rule Supplemental_Figure_1:
     output:
+        "figures/Supp_Figure_1.pdf",
         "figures/Supp_Figure_1.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -209,6 +231,7 @@ rule Supplemental_Figure_1:
 
 rule Supplemental_Figure_2:
     output:
+        "figures/Supp_Figure_2.pdf",
         "figures/Supp_Figure_2.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -219,6 +242,7 @@ rule Supplemental_Figure_2:
         
 rule Supplemental_Figure_3:
     output:
+        "figures/Supp_Figure_3.pdf",
         "figures/Supp_Figure_3.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -229,6 +253,7 @@ rule Supplemental_Figure_3:
         
 rule Supplemental_Figure_4:
     output:
+        "figures/Supp_Figure_4.pdf",
         "figures/Supp_Figure_4.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -239,6 +264,7 @@ rule Supplemental_Figure_4:
 
 rule Supplemental_Figure_5:
     output:
+        "figures/Supp_Figure_5.pdf",
         "figures/Supp_Figure_5.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -249,6 +275,7 @@ rule Supplemental_Figure_5:
         
 rule Supplemental_Figure_6:
     output:
+        "figures/Supp_Figure_6.pdf",
         "figures/Supp_Figure_6.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -259,6 +286,7 @@ rule Supplemental_Figure_6:
         
 rule Supplemental_Figure_7:
     output:
+        "figures/Supp_Figure_7.pdf",
         "figures/Supp_Figure_7.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -269,6 +297,7 @@ rule Supplemental_Figure_7:
         
 rule Supplemental_Figure_8:
     output:
+        "figures/Supp_Figure_8.pdf",
         "figures/Supp_Figure_8.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -279,6 +308,7 @@ rule Supplemental_Figure_8:
         
 rule Supplemental_Figure_9:
     output:
+        "figures/Supp_Figure_9.pdf",
         "figures/Supp_Figure_9.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
@@ -289,6 +319,7 @@ rule Supplemental_Figure_9:
         
 rule Supplemental_Figure_10:
     output:
+        "figures/Supp_Figure_10.pdf",
         "figures/Supp_Figure_10.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"

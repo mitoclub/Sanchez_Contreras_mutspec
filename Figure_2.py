@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as Patch
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from GlobalVars_ import tissue_type, tissue_type_long, mut_type, \
-     mut_type_pretty, color_cycle, mut_type_conv, R_lib_path
+     mut_type_pretty, color_cycle, mut_type_conv, R_lib_path, tissue_type_abbrev
 from HelperFuncs_ import p_val_convert
 from compile_data import melt_summary, summary_import
 from compute_stats import heatmap_stats, Fig2C_stats
@@ -187,7 +187,7 @@ def Fig_2C_heatmap(data, mut_class, ax):
 
     sns.despine(top=False, right=False, ax=axd[subplot[i]])
 
-    plot.set_xticklabels(tissue_type[:-1], fontsize=14)
+    plot.set_xticklabels(tissue_type_abbrev[:-1], fontsize=14)
     plot.set_yticklabels('')
         
     return plot
@@ -283,10 +283,10 @@ if __name__ == '__main__':
             old_tissue_comp = pd.read_csv("data/stats/Figure_2_" + age + "_" + mut_type_conv[mut_class] + "_stats.csv",
                                           index_col=0)
 
-        heatmap = mod_heatmap(p_val_convert(young_tissue_comp), tissue_type[:-1],
+        heatmap = mod_heatmap(p_val_convert(young_tissue_comp), tissue_type_abbrev[:-1],
                               axd[subplot[i]])
 
-        heatmap2 = mod_heatmap(p_val_convert(old_tissue_comp), tissue_type[:-1],
+        heatmap2 = mod_heatmap(p_val_convert(old_tissue_comp), tissue_type_abbrev[:-1],
                                axd2[subplot[i]])
 
         heatmap3 = Fig_2C_heatmap(ratio_df, mut_class, axd3[subplot[i]])
@@ -317,3 +317,4 @@ if __name__ == '__main__':
         os.mkdir("figures")
 
     fig.savefig('figures/Figure_2.png', dpi=600, facecolor='white')
+    fig.savefig('figures/Figure_2.pdf', dpi=600, facecolor='white')

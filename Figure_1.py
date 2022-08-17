@@ -10,7 +10,7 @@ import seaborn as sns
 import pandas as pd
 import matplotlib.pyplot as plt
 import matplotlib.patches as Patch
-from GlobalVars_ import color_cycle, tissue_type, tissue_type_long
+from GlobalVars_ import color_cycle, tissue_type, tissue_type_long, tissue_type_abbrev
 from HelperFuncs_ import p_val_convert
 from compile_data import melt_summary, summary_import
 import os
@@ -130,10 +130,10 @@ if __name__ == '__main__':
         old_InDel = pd.read_csv("data/stats/Figure_1D_Old_stats.csv",
                                 index_col=0)
 
-    mod_heatmap(p_val_convert(young_SNV), tissue_type[:-1], axd['B'])
-    mod_heatmap(p_val_convert(old_SNV), tissue_type[:-1], axd['C'])
-    mod_heatmap(p_val_convert(young_InDel), tissue_type[:-1], axd2['B'])
-    mod_heatmap(p_val_convert(old_InDel), tissue_type[:-1], axd2['C'])
+    mod_heatmap(p_val_convert(young_SNV), tissue_type_abbrev[:-1], axd['B'])
+    mod_heatmap(p_val_convert(old_SNV), tissue_type_abbrev[:-1], axd['C'])
+    mod_heatmap(p_val_convert(young_InDel), tissue_type_abbrev[:-1], axd2['B'])
+    mod_heatmap(p_val_convert(old_InDel), tissue_type_abbrev[:-1], axd2['C'])
 
     for i, j in enumerate(['B', 'C']):
         title = ['Young', 'Old']
@@ -144,3 +144,4 @@ if __name__ == '__main__':
         os.mkdir("figures")
 
     fig.savefig('figures/Figure_1.png', dpi=600, facecolor='white')
+    fig.savefig('figures/Figure_1.pdf', dpi=600, facecolor='white')

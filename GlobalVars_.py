@@ -15,6 +15,7 @@ perfused_mouse_id = ('OM3-MS-P_perf', 'OM4-MS-P_perf', 'OM6-MS-P_perf')
 
 #Tissues
 tissue_type = ('K', 'L', 'EC', 'R', 'Hi', 'C', 'M', 'He', 'B')
+tissue_type_abbrev = ('K', 'L', 'RC', 'R', 'Hi', 'C', 'M', 'He', 'B')
 tissue_type_long = ('Kidney', 'Liver',  'RPE/Chor.', 'Retina', 'Hippo.', 'Cerebel.', 'Sk. Muscle', 'Heart')
 
 #Other

@@ -137,13 +137,13 @@ def clone_plot(df, tissue, flat_file, ax):
 
     y.tick_params(labelsize='x-large')
     y.spines['bottom'].set_color('black')
-    y.set_yticks([-6, 0, 6])
+    y.set_yticks([-7, 0, 7])
 
     if i % 2 == 1:
         y.set_yticklabels([])
 
     else:
-        y.set_yticklabels(['0.0064', '0', '0.0064'])
+        y.set_yticklabels(['0.0128', '0', '0.0128'])
 
     ax.set_yticks([1, 0, 1])
     ax.set_ylim(-1, 1)
@@ -218,3 +218,4 @@ if __name__ == "__main__":
         os.mkdir("figures/")
 
     fig.savefig("figures/Figure_3.png", facecolor="white", dpi=600)
+    fig.savefig("figures/Figure_3.pdf", facecolor="white", dpi=600)
