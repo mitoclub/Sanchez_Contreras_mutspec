@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as Patch
 import seaborn as sns
 from compile_data import summary_import, melt_summary
-from GlobalVars_ import color_cycle, tissue_type, tissue_type_long
+from GlobalVars_ import color_cycle, tissue_type, tissue_type_long, tissue_type_abbrev
 
 if not os.path.isfile("data/imported_data/summary_data_tidy.csv"):
     if not os.path.isdir("data/imported_data/"):
@@ -27,7 +27,7 @@ data = data.query("Treatment!='perf' & Age=='Old' & Class=='Total_SNV_Freq'")
 fig, ax = plt.subplots(ncols=1, figsize=(12, 7))
 
 sns.barplot(x="Tissue", y="Frequency", hue="Treatment", data=data,
-            order=tissue_type[:-1], palette='bright', ci='sd', edgecolor='black',
+            order=tissue_type_abbrev[: -1], palette='bright', ci='sd', edgecolor='black',
             lw=1.2, errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
 
 hatches = ['///', '---']

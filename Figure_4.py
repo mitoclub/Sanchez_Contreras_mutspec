@@ -13,7 +13,8 @@ from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import seaborn as sns
 import pandas as pd
 import itertools
-from GlobalVars_ import color_cycle, tissue_type, tissue_type_long, mut_type_pretty
+from GlobalVars_ import color_cycle, tissue_type, tissue_type_long, tissue_type_abbrev, \
+                        mut_type_pretty
 from compile_data import mut_file_import, calc_clone_numbers
 
 
@@ -60,7 +61,7 @@ if __name__ == '__main__':
 
     sns.barplot(x='Class', y='Frequency', hue='Tissue',
                 data=clone_data_long.query("Cohort=='Young'"),
-                hue_order=tissue_type[:-1],
+                hue_order=tissue_type_abbrev[: -1],
                 palette=color_cycle, facecolor='white', order=mut_type_names,
                 ci='sd', lw=1.5, errwidth=1.2, errcolor='black',
                 capsize=0.07, ax=ax[0])
@@ -69,7 +70,7 @@ if __name__ == '__main__':
 
     sns.barplot(x='Class', y='Frequency', hue='Tissue',
                 data=clone_data_long.query("Cohort=='Old'"),
-                hue_order=tissue_type[:-1], palette=color_cycle,
+                hue_order=tissue_type_abbrev[: -1], palette=color_cycle,
                 order=mut_type_names, ci='sd', edgecolor='black', lw=1.2,
                 errwidth=1.2, errcolor='black', capsize=0.07, ax=ax[1])
 
@@ -77,7 +78,7 @@ if __name__ == '__main__':
 
     sns.barplot(x='Class', y='Frequency', hue='Tissue',
                 data=clone_data_long.query("Cohort=='Old'"),
-                hue_order=tissue_type[:-1], palette=color_cycle,
+                hue_order=tissue_type_abbrev[: -1], palette=color_cycle,
                 order=mut_type_names, edgecolor='black', ci='sd', lw=1,
                 errwidth=1.2, errcolor='black', capsize=0.07, ax=ax1ins)
 

@@ -8,7 +8,8 @@ Created on Tue Jul  5 14:30:52 2022
 
 import os
 import Supp_Figure_1
-from GlobalVars_ import tissue_type, tissue_type_long, old_mouse_id, color_cycle
+from GlobalVars_ import tissue_type, tissue_type_long, old_mouse_id, tissue_type_abbrev, \
+                        color_cycle
 from compile_data import calc_depth_plot_data
 
 if __name__ == "__main__":
@@ -19,13 +20,13 @@ if __name__ == "__main__":
 
     for index, tissue in enumerate(tissue_type[:-1]):
 
-        if not os.path.isfile("data/imported_data/Supplemental_Figure_2_" + tissue + "_depth_data.csv"):
+        if not os.path.isfile("data/imported_data/Supplemental_Figure_2_" + tissue_type_abbrev[index] + "_depth_data.csv"):
             if not os.path.isdir("data/stats/"):
                 os.mkdir("data/stats/")
 
             depth_df = calc_depth_plot_data(old_mouse_id,
                                             tissue,
-                                            "data/imported_data/Supplemental_Figure_2_" + tissue + "_depth_data.csv")
+                                            "data/imported_data/Supplemental_Figure_2_" + tissue_type_abbrev[index] + "_depth_data.csv")
         else:
             depth_df = calc_depth_plot_data(old_mouse_id, tissue)
 

@@ -34,7 +34,7 @@ def mutation_bar(y, data, ax):
     fc = ['white'] * 8 + color_cycle
     ec = color_cycle + ['black'] * 8
 
-    plot = sns.barplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type[:-1],
+    plot = sns.barplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type_abbrev[: -1],
                        palette='bright', ci='sd', edgecolor='black', lw=1.2,
                        errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
 

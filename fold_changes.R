@@ -17,7 +17,7 @@ for (i in unique(summary_data_tidy$Class)[3:8]){
                  Estimate=ratio_data$estimate[3],
                  confInt1=ratio_data$conf.int[1],
                  confInt2=ratio_data$conf.int[2],
-                 qVal=ratio_data$p.value))
+                 pVal=ratio_data$p.value))
   }
 }
 write.csv(x=final_df, file="data/stats/Figure_2_ratio_statistics.csv")

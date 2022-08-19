@@ -53,9 +53,9 @@ rule all:
         "data/stats/Figure_2_Young_CG_GC_heatmap_stats.csv",
         "data/stats/Figure_2_Young_CT_GA_heatmap_stats.csv",
         "data/stats/Figure_2_ratio_statistics.csv",
-        "data/stats/Figure_4A_statistics.csv",
-        "data/stats/Figure_4B_statistics.csv",
-        "data/stats/Figure_6_Dunnett_statistics.csv",
+        "data/stats/Figure_3A_statistics.csv",
+        "data/stats/Figure_3B_statistics.csv",
+        "data/stats/Figure_5_Dunnett_statistics.csv",
         "data/stats/Supplemental_Figure_7_statistics.csv",
         
         "data/imported_data/summary_data_wide.csv",
@@ -137,9 +137,9 @@ rule compute_stats:
         "data/stats/Figure_2_Young_CG_GC_heatmap_stats.csv",
         "data/stats/Figure_2_Young_CT_GA_heatmap_stats.csv",
         "data/stats/Figure_2_ratio_statistics.csv",
-        "data/stats/Figure_4A_statistics.csv",
-        "data/stats/Figure_4B_statistics.csv",
-        "data/stats/Figure_6_Dunnett_statistics.csv",
+        "data/stats/Figure_3A_statistics.csv",
+        "data/stats/Figure_3B_statistics.csv",
+        "data/stats/Figure_5_Dunnett_statistics.csv",
         "data/stats/Supplemental_Figure_7_statistics.csv"
     priority:
         1

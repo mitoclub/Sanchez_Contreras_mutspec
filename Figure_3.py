@@ -14,7 +14,7 @@ import numpy as np
 import pandas as pd
 from operator import itemgetter
 import os
-from GlobalVars_ import tissue_type, tissue_type_long, color_cycle
+from GlobalVars_ import tissue_type, tissue_type_long, tissue_type_abbrev, color_cycle
 from compile_data import mut_file_import, calc_clone_numbers
 
 
@@ -181,20 +181,20 @@ if __name__ == "__main__":
     ec = color_cycle + ['black'] * 8
 
     plot_clone_numbers(x="Tissue", y="Clone_Freq", hue="Cohort",
-                       data=final_clone_data, order=tissue_type[:-1], ylim=None,
-                       ax=axd['A'], xlabel='',
+                       data=final_clone_data, order=tissue_type_abbrev[: -1], 
+                       ylim=None, ax=axd['A'], xlabel='',
                        ylabel="Clone Frequency($\mathregular{10^{-2}}$)",
                        xticklabels=tissue_type_long, fc=fc, ec=ec)
 
     plot_clone_numbers(x="Tissue", y="Percent_Clone", hue="Cohort",
-                       data=final_clone_data, order=tissue_type[:-1], ylim=[0, 14],
-                       ax=axd['B'], xlabel='', ylabel="Percent Clones",
+                       data=final_clone_data, order=tissue_type_abbrev[: -1], 
+                       ylim=[0, 14], ax=axd['B'], xlabel='', ylabel="Percent Clones",
                        xticklabels=tissue_type_long, fc=fc, ec=ec)
 
     sub_data = final_clone_data.query("Tissue in ['C', 'M', 'He']")
 
     plot_clone_numbers(x="Tissue", y="Clone_Freq", hue="Cohort", data=sub_data,
-                       order=tissue_type[-4:-1], ylim=None, ax=axdins,
+                       order=tissue_type_abbrev[-4: -1], ylim=None, ax=axdins,
                        xlabel='', ylabel="", xticklabels=['', '', ''],
                        fc=itemgetter(0, 1, 2, 13, 14, 15)(fc), ec=ec[5:11],
                        legend=False)

@@ -31,6 +31,8 @@ def summary_import(summary_file):
                             'Total_SNV_Freq', 'Total_InDel_Freq', 'A>T/T>A',
                             'A>C/T>G', 'A>G/T>C', 'C>A/G>T', 'C>T/G>A', 'C>G/G>C']
 
+    summary_data.Tissue.replace(['EC'], ['RC'], inplace=True)
+    
     return summary_data
 
 
@@ -45,6 +47,8 @@ def melt_summary(summary_data):
     summary_data_long.columns = ["MouseID", "Tissue", 'Treatment', 'Age', 'Class',
                                  'Frequency']
 
+    summary_data.Tissue.replace(['EC'], ['RC'], inplace=True)
+    
     return summary_data_long
 
 
@@ -195,11 +199,13 @@ def calc_clone_numbers(mut_file_data):
     
                     final_clone_data = pd.concat([final_clone_data, temp_df], 
                                                  axis=0)
+        
                 except:
                     pass
                 
     final_clone_data.reset_index(drop=True, inplace=True)
-
+    final_clone_data.Tissue.replace(['EC'], ['RC'], inplace=True)
+    
     return final_clone_data
 
 

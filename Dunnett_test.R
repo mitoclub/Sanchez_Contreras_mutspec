@@ -42,4 +42,4 @@ for (j in unique(summary_data_tidy$Tissue)[1:8]){
   }
 }
 
-write.csv(x=final_df, file="data/stats/Figure_6_Dunnett_statistics.csv")
+write.csv(x=final_df, file="data/stats/Figure_5_Dunnett_statistics.csv")

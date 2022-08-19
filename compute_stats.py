@@ -11,7 +11,8 @@ import scipy.stats as stats
 import pandas as pd
 from compile_data import summary_import, melt_summary, mut_file_import, \
                          calc_clone_numbers
-from GlobalVars_ import tissue_type, mut_type, mut_type_conv, R_lib_path
+from GlobalVars_ import tissue_type, mut_type, mut_type_conv, tissue_type_abbrev, \
+                        R_lib_path
 from HelperFuncs_ import statsmodel_summary_to_df
 import numpy as np
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
@@ -22,7 +23,7 @@ def Fig1A_D_stats(data, mut_class, output=None):
     
     p_value_dict = defaultdict(lambda:[])
     
-    for tissue in tissue_type[: -1]:
+    for tissue in tissue_type_abbrev[: -1]:
         young_data = data.query("Age=='Young' & Tissue==@tissue & Treatment=='NT'")
         old_data = data.query("Age=='Old' & Tissue==@tissue & Treatment=='NT'")
         
@@ -44,7 +45,7 @@ def anova_df(df, cohort, mut_class):
 
     data = []
 
-    for tissue in tissue_type[: -1]:
+    for tissue in tissue_type_abbrev[: -1]:
         sub_data = df.query("Age==@cohort & Treatment=='NT' & Tissue==@tissue & Class==@mut_class")
         data.append(sub_data['Frequency'])
 
@@ -65,9 +66,9 @@ def heatmap_stats(data, cohort, mut_class, output=None):
     p_val, anova = anova_df(data, cohort, mut_class)
     statsmodel_df = statsmodel_summary_to_df(anova)
     
-    for tissue1 in tissue_type[:-1]:
+    for tissue1 in tissue_type_abbrev[:-1]:
         
-        for tissue2 in tissue_type[:-1]:
+        for tissue2 in tissue_type_abbrev[:-1]:
             
             df = statsmodel_df.query("group1==@tissue1 | group2==@tissue1")
             x = df.query("group1==@tissue2 | group2==@tissue2")['p-adj']
@@ -102,11 +103,11 @@ def Fig2C_stats(lib_loc):
     #output.close()
 
 
-def Fig4A_B_stats(data, column_name, output):
+def Fig3A_B_stats(data, column_name, output):
     
     clone_percent_pvals = {tissue: 0 for tissue in tissue_type[: -1]}
 
-    for tissue in tissue_type[: -1]:
+    for tissue in tissue_type_abbrev[: -1]:
         
         old = stats.ttest_ind(data.query("Tissue==@tissue & Cohort=='Old'")[column_name], 
                               data.query("Tissue==@tissue & Cohort=='Young'")[column_name], 
@@ -122,17 +123,17 @@ def Fig4A_B_stats(data, column_name, output):
     return pvalues
 
 
-def Fig6_stats(lib_loc):
+def Fig5_stats(lib_loc):
 
     r_source = robjects.r('source')
     
     if os.path.isdir('data/stats/') ==  False:
         os.mkdir('data/stats/')
-    output = open("data/stats/Figure_6_Dunnett_statistics.csv", 'w')
+    #output = open("data/stats/Figure_5_Dunnett_statistics.csv", 'w')
         
     r_source('Dunnett_test.R')
     
-    output.close()
+    #output.close()
 
 
 def Supp_Fig_7_stats(clone_freq_df, output):
@@ -211,11 +212,11 @@ if __name__ == "__main__":
     Fig2C_stats(R_lib_path) # change package location as necessary
     
     # Figure 3 statistics
-    Fig4A_B_stats(final_clone_data, "Percent_Clone", "data/stats/Figure_4A_statistics.csv")        
-    Fig4A_B_stats(final_clone_data, "Clone_Freq", "data/stats/Figure_4B_statistics.csv")
+    Fig3A_B_stats(final_clone_data, "Percent_Clone", "data/stats/Figure_3A_statistics.csv")        
+    Fig3A_B_stats(final_clone_data, "Clone_Freq", "data/stats/Figure_3B_statistics.csv")
     
     #Figure 5 statistics
-    Fig6_stats(R_lib_path)
+    Fig5_stats(R_lib_path)
     
     #Supplemental Figure 8 statistics
     Supp_Fig_7_stats(final_clone_data, "data/stats/Supplemental_Figure_7_statistics.csv")

@@ -80,12 +80,12 @@ def mod_ratios(mratios_file):
     ratio_df["Estimate"] = np.where(ratio_df['Class'] == "A>C/T>G", 0, ratio_df['Estimate'])
     ratio_df["confInt1"] = np.where(ratio_df['Class'] == "A>C/T>G", 0, ratio_df['confInt1'])
     ratio_df["confInt2"] = np.where(ratio_df['Class'] == "A>C/T>G", 0, ratio_df['confInt2'])
-    ratio_df["qVal"] = np.where(ratio_df['Class'] == "A>C/T>G", np.nan, ratio_df['qVal'])
-    ratio_df['qVal'] = np.where(ratio_df['qVal'] > 0.05, 0, ratio_df['qVal'])
-    ratio_df['qVal'] = np.where((ratio_df['qVal'] > 0) & (ratio_df['qVal'] < 0.0001), 4, ratio_df['qVal'])
-    ratio_df['qVal'] = np.where((0.0001 < ratio_df['qVal']) & (ratio_df['qVal'] < 0.001), 3, ratio_df['qVal'])
-    ratio_df['qVal'] = np.where((0.001 < ratio_df['qVal']) & (ratio_df['qVal'] < 0.01), 2, ratio_df['qVal'])
-    ratio_df['qVal'] = np.where((0.01 < ratio_df['qVal']) & (ratio_df['qVal'] < 0.05), 1, ratio_df['qVal'])
+    ratio_df["pVal"] = np.where(ratio_df['Class'] == "A>C/T>G", np.nan, ratio_df['pVal'])
+    ratio_df['pVal'] = np.where(ratio_df['pVal'] > 0.05, 0, ratio_df['pVal'])
+    ratio_df['pVal'] = np.where((ratio_df['pVal'] > 0) & (ratio_df['pVal'] < 0.0001), 4, ratio_df['pVal'])
+    ratio_df['pVal'] = np.where((0.0001 < ratio_df['pVal']) & (ratio_df['pVal'] < 0.001), 3, ratio_df['pVal'])
+    ratio_df['pVal'] = np.where((0.001 < ratio_df['pVal']) & (ratio_df['pVal'] < 0.01), 2, ratio_df['pVal'])
+    ratio_df['pVal'] = np.where((0.01 < ratio_df['pVal']) & (ratio_df['pVal'] < 0.05), 1, ratio_df['pVal'])
     ratio_df['u_confInt_delta'] = ratio_df['confInt2'] - ratio_df['Estimate']
     ratio_df['l_confInt_delta'] = ratio_df['Estimate'] - ratio_df['confInt1']
 
@@ -146,7 +146,7 @@ def Fig_2C(data, ax):
     sort_dict2 = {'C>T/G>A': 0, 'A>G/T>C': 1, 'C>A/G>T': 2, 'C>G/G>C': 3, 'A>T/T>A': 4, 'A>C/T>G': 5}
     resorted_df_list = []
     
-    for tissue in tissue_type[:-1]:
+    for tissue in tissue_type_abbrev[:-1]:
         resorted_df = data.query("Tissue==@tissue").sort_values(by=['Class'],
                                                                     key=lambda x: x.map(sort_dict2))
         resorted_df_list.append(resorted_df)
@@ -180,7 +180,7 @@ def Fig_2C(data, ax):
 
 def Fig_2C_heatmap(data, mut_class, ax):
 
-    plot = sns.heatmap(pd.DataFrame(data.query('Class==@mut_class')['qVal']).T,
+    plot = sns.heatmap(pd.DataFrame(data.query('Class==@mut_class')['pVal']).T,
                 ax=ax, square=True, vmin=0, vmax=10,
                 cbar=False, cmap='rocket_r', linewidths=0.5,
                 linecolor='black')
@@ -194,7 +194,7 @@ def Fig_2C_heatmap(data, mut_class, ax):
 
 if __name__ == '__main__':
 
-    custom_dict = {'K': 0, 'L': 1, 'EC': 3, 'R': 4, 'Hi': 5, 'C': 6, 'M': 7, 'He': 8}
+    custom_dict = {'K': 0, 'L': 1, 'RC': 3, 'R': 4, 'Hi': 5, 'C': 6, 'M': 7, 'He': 8}
 
     if not os.path.isfile("data/imported_data/summary_data_tidy.csv"):
         if not os.path.isdir("data/imported_data/"):
@@ -217,7 +217,7 @@ if __name__ == '__main__':
     else:
         ratio_df = mod_ratios("data/stats/Figure_2_ratio_statistics.csv")
 
-    sort_dict = {'K': 0, 'L': 1, 'EC': 3, 'R': 4, 'Hi': 5, 'C': 6, 'M': 7, 'He': 8}
+    sort_dict = {'K': 0, 'L': 1, 'RC': 3, 'R': 4, 'Hi': 5, 'C': 6, 'M': 7, 'He': 8}
     ratio_df.sort_values(by=['Tissue'], key=lambda x: x.map(sort_dict),
                          inplace=True)
 
@@ -283,10 +283,10 @@ if __name__ == '__main__':
             old_tissue_comp = pd.read_csv("data/stats/Figure_2_" + age + "_" + mut_type_conv[mut_class] + "_stats.csv",
                                           index_col=0)
 
-        heatmap = mod_heatmap(p_val_convert(young_tissue_comp), tissue_type_abbrev[:-1],
+        heatmap = mod_heatmap(p_val_convert(young_tissue_comp), tissue_type_abbrev[: -1],
                               axd[subplot[i]])
 
-        heatmap2 = mod_heatmap(p_val_convert(old_tissue_comp), tissue_type_abbrev[:-1],
+        heatmap2 = mod_heatmap(p_val_convert(old_tissue_comp), tissue_type_abbrev[: -1],
                                axd2[subplot[i]])
 
         heatmap3 = Fig_2C_heatmap(ratio_df, mut_class, axd3[subplot[i]])
@@ -303,11 +303,11 @@ if __name__ == '__main__':
 
     sns.heatmap(pd.DataFrame([4, 3, 2, 1, 0]), square=True, cbar=False,
                 cmap='rocket_r', vmin=0, vmax=10,
-                yticklabels=['q<0.0001', '0.0001<q<0.001', '0.001<q<0.01', '0.01<q<0.05', 'ns'],
+                yticklabels=['p<0.0001', '0.0001<p<0.001', '0.001<p<0.01', '0.01<p<0.05', 'NS'],
                 xticklabels=[], ax=axd3["G"])
     axd3['G'].tick_params(labelsize="large", labelleft=False, labelright=True,
                          left=False, right=True, labelrotation=0)
-    axd3['B'].set_yticklabels(["q-value"], rotation=0, fontsize=14)
+    axd3['B'].set_yticklabels(["p-value"], rotation=0, fontsize=14)
     axd3['A'].text(x=4.9, y=0.1, s="ND", fontsize=25)
     pos = axd3['G'].get_position()
     pos.y0 = 0.08
