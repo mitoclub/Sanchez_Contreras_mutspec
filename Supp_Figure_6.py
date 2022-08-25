@@ -9,6 +9,7 @@ Created on Wed Jul 27 14:23:13 2022
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+from matplotlib.colors import LinearSegmentedColormap
 import seaborn as sns
 from GlobalVars_ import tissue_type, tissue_type_long, mut_type, \
                         mut_type_pretty, young_mouse_id, old_mouse_id
@@ -23,7 +24,6 @@ def process_data(data, age):
     for tissue in tissue_type[:-1]:
         
         count_cols = [x + "_Count" for x in mut_type]
-        new_cols = [x + "_Fraction" for x in mut_type]
         columns = count_cols + ['Total_SNVs']
         sub_data = data.query("Tissue==@tissue & Treatment=='NT' & Age==@age")[columns].sum(axis=0)
         summed_data.append(pd.DataFrame(sub_data))
@@ -39,11 +39,13 @@ def process_data(data, age):
 def plot_figure():
     
     fig, ax = plt.subplots(nrows=2, figsize=(12,8), gridspec_kw={'hspace':0.8})
+    colors = ['#fffb00', '#d4fb79', '#ff40ff', '#ff85ff', '#73fa79', '#019051']
+    cmap = LinearSegmentedColormap.from_list("mycmap", colors)
     
     young[mut_type_pretty].plot(kind='bar', stacked=True, ec='black', lw=0.4,
-                                ax=ax[0])
+                                ax=ax[0], colormap=cmap)
     old[mut_type_pretty].plot(kind='bar', stacked=True, ec='black', lw=0.4, 
-                              ax=ax[1], legend=None)
+                              ax=ax[1], legend=None, colormap=cmap)
     sns.despine(fig=fig, top=False, left=True)
     
     for i in [0,1]:
@@ -54,7 +56,9 @@ def plot_figure():
                 bar.set_hatch('////')
         
         ax[i].margins(x=0, y=0)
-        ax[0].legend(markerscale=5, fontsize=16, bbox_to_anchor=[.4, -0.4, 0.85, 0.5])
+        handles, labels = ax[0].get_legend_handles_labels()
+        ax[0].legend(reversed(handles), reversed(labels), markerscale=5, 
+                     fontsize=16, bbox_to_anchor=[.4, -0.4, 0.85, 0.5])
         ax[i].set_xticklabels(tissue_type_long, rotation=45, fontsize=16)
         ax[i].set_ylabel('Percent', fontsize=16)
         ax[i].tick_params('y', labelsize=14)
