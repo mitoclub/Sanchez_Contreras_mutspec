@@ -38,7 +38,7 @@ def mutation_bar(y, data, ax):
                        palette='bright', ci='sd', edgecolor='black', lw=1.2,
                        errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
 
-    sns.stripplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type[:-1],
+    sns.stripplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type_abbrev[:-1],
                   dodge=True, ax=plot, alpha=0.7, color='black')
 
     sns.despine(ax=plot)

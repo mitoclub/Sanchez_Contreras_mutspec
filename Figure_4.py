@@ -22,8 +22,8 @@ def setup_figure():
     rcParams['axes.formatter.limits'] = (-6, 6)
     fig, ax = plt.subplots(ncols=2, figsize=(25, 8))
 
-    ax[0].axhline(0.0005, color='black', ls='--', alpha=0.5)
-    ax[1].axhline(0.0005, color='black', ls='--', alpha=0.5)
+    ax[0].axhline(0.0005, color='black', ls='--', lw=2, alpha=1)
+    ax[1].axhline(0.0005, color='black', ls='--', lw=2, alpha=1)
 
     ax1ins = inset_axes(ax[1], width="60%", height="60%",
                         bbox_to_anchor=[-0.05, -0.05, 1, 1],
@@ -93,30 +93,30 @@ if __name__ == '__main__':
         legend1 = [Patch.Patch(facecolor=color_cycle[i], edgecolor='black',
                                label=tissue_type_long[i]) for i in range(8)]
 
-    ax[0].legend(handles=legend0, fontsize=14, ncol=4, bbox_to_anchor=[0.9, 1.12], frameon=False)
-    ax[1].legend(handles=legend1, fontsize=14, ncol=4, bbox_to_anchor=[0.9, 1.12], frameon=False)
+    ax[0].legend(handles=legend0, fontsize=22, ncol=4, bbox_to_anchor=[1.1, 1.2], frameon=False)
+    ax[1].legend(handles=legend1, fontsize=22, ncol=4, bbox_to_anchor=[1.2, 1.2], frameon=False)
 
-    ax[0].set_ylabel("Clone Frequency", fontsize=18)
-    ax[1].set_ylabel("Clone Frequency", fontsize=18)
+    ax[0].set_ylabel("Clone Frequency", fontsize=22)
+    ax[1].set_ylabel("Clone Frequency", fontsize=22)
 
     ax[0].set_xlabel("")
     ax[1].set_xlabel("")
 
-    ax[0].set_xticklabels(mut_type_pretty, fontsize=18)
-    ax[1].set_xticklabels(mut_type_pretty, fontsize=18)
+    ax[0].set_xticklabels(mut_type_pretty, rotation=45)
+    ax[1].set_xticklabels(mut_type_pretty, rotation=45)
 
-    ax[0].tick_params(labelsize=15)
-    ax[1].tick_params(labelsize=15)
+    ax[0].tick_params(labelsize=22)
+    ax[1].tick_params(labelsize=22)
 
     ax[0].set_ylim(0, 0.0011)
     ax[1].set_ylim(0, 0.0125)
 
-    ax1ins.set_xticklabels(mut_type_pretty, fontsize=12, rotation=45)
+    ax1ins.set_xticklabels(mut_type_pretty, fontsize=17, rotation=45)
 
     ax1ins.set_xlabel("")
 
-    ax1ins.set_ylabel("Clone Frequency", fontsize=14)
-
+    ax1ins.set_ylabel("Clone Frequency", fontsize=18)
+    ax1ins.tick_params(labelsize=16)
     ax1ins.legend_.remove()
 
     if not os.path.isdir("figures"):
