@@ -122,7 +122,7 @@ if __name__ == '__main__':
     if not os.path.isdir("figures"):
         os.mkdir("figures/")
 
-    fig.savefig("figures/Figure_4.png", facecolor='white', dpi=600, 
+    fig.savefig("figures/Figure_4A-B.png", facecolor='white', dpi=600, 
                 bbox_inches='tight')
-    fig.savefig("figures/Figure_4.pdf", facecolor='white', dpi=600, 
+    fig.savefig("figures/Figure_4A-B.pdf", facecolor='white', dpi=600, 
                 bbox_inches='tight')

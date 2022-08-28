@@ -5,7 +5,7 @@ rule all:
         "figures/Figure_1.png",
         "figures/Figure_2.png",
         "figures/Figure_3.png",
-        "figures/Figure_4.png",
+        "figures/Figure_4A-B.png",
         "figures/Figure_5.png",
         "figures/Supp_Figure_1.png",
         "figures/Supp_Figure_2.png",
@@ -21,7 +21,7 @@ rule all:
         "figures/Figure_1.pdf",
         "figures/Figure_2.pdf",
         "figures/Figure_3.pdf",
-        "figures/Figure_4.pdf",
+        "figures/Figure_4A-B.pdf",
         "figures/Figure_5.pdf",
         "figures/Supp_Figure_1.pdf",
         "figures/Supp_Figure_2.pdf",
@@ -195,8 +195,8 @@ rule Figure_4:
         "data/imported_data/mut_file_data.csv",
         "data/imported_data/summary_clone_data.csv"
     output:
-        "figures/Figure_4.pdf",
-        "figures/Figure_4.png"
+        "figures/Figure_4A-B.pdf",
+        "figures/Figure_4A-B.png"
     conda:
         "Mouse_mtDNA_analysis_env.yaml"
     shell:
