@@ -174,6 +174,7 @@ def Fig_2C(data, ax):
     
     plot.set_ylabel("Fold Change w/Age ($log_2$ Scaled)", fontsize=18)
     plot.tick_params(labelsize=18)
+    plot.set_xticklabels(mut_type_pretty)
     plot.set_xlabel("")
 
     return plot

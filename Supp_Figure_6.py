@@ -41,24 +41,18 @@ def plot_figure():
     fig, ax = plt.subplots(nrows=2, figsize=(12,8), gridspec_kw={'hspace':0.8})
     colors = ['#fffb00', '#d4fb79', '#ff40ff', '#ff85ff', '#73fa79', '#019051']
     cmap = LinearSegmentedColormap.from_list("mycmap", colors)
-    
-    young[mut_type_pretty].plot(kind='bar', stacked=True, ec='black', lw=0.4,
+    order = ['G→A/C→T','G→T/C→A', 'G→C/C→G', 'A→G/T→C', 'A→T/T→A', 'A→C/T→G']
+    young[order].plot(kind='bar', stacked=True, ec='black', lw=0.4,
                                 ax=ax[0], colormap=cmap)
-    old[mut_type_pretty].plot(kind='bar', stacked=True, ec='black', lw=0.4, 
+    old[order].plot(kind='bar', stacked=True, ec='black', lw=0.4, 
                               ax=ax[1], legend=None, colormap=cmap)
     sns.despine(fig=fig, top=False, left=True)
     
     for i in [0,1]:
         
-        for x, bar in enumerate(ax[i].patches):
-        
-            if x in range(16,32):
-                bar.set_hatch('////')
-        
         ax[i].margins(x=0, y=0)
-        handles, labels = ax[0].get_legend_handles_labels()
-        ax[0].legend(reversed(handles), reversed(labels), markerscale=5, 
-                     fontsize=16, bbox_to_anchor=[.4, -0.4, 0.85, 0.5])
+        ax[0].legend( markerscale=5, fontsize=16, 
+                     bbox_to_anchor=[.4, -0.4, 0.85, 0.5])
         ax[i].set_xticklabels(tissue_type_long, rotation=45, fontsize=16)
         ax[i].set_ylabel('Percent', fontsize=16)
         ax[i].tick_params('y', labelsize=14)
