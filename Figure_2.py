@@ -22,7 +22,7 @@ from compute_stats import heatmap_stats, Fig2C_stats
 def spectrum(data, mut_type, ax, fill=False, ymin=None, ymax=None, legend=True):
     
     plot = sns.barplot(x='Class', y='Frequency', hue='Tissue', data=data,
-                       palette='bright', order=mut_type, ci='sd',
+                       palette='colorblind', order=mut_type, ci='sd',
                        edgecolor='black', lw=1.5, errwidth=1.5,
                        capsize=0.04, errcolor='black', ax=ax)
 
@@ -30,6 +30,8 @@ def spectrum(data, mut_type, ax, fill=False, ymin=None, ymax=None, legend=True):
                   order=mut_type, ax=plot, alpha=0.7, dodge=True, color='black')
 
     sns.despine(ax=ax)
+    plot.spines['left'].set_linewidth(2)
+    plot.spines['bottom'].set_linewidth(2)
 
     if ymin is not None and ymax is not None:
         plot.set_ylim(ymin, ymax)
@@ -41,10 +43,12 @@ def spectrum(data, mut_type, ax, fill=False, ymin=None, ymax=None, legend=True):
             plot.patches[i].set_facecolor('white')
             plot.patches[i].set_edgecolor(color_cycle[j])
             plot.patches[i].set(lw=2.4)
+            ax.set_hatch('/////')
 
             if legend:
-                legend = [Patch.Patch(facecolor='white', edgecolor=color_cycle[x],
-                                      label=tissue_type_long[x]) for x in range(8)]
+                legend = [Patch.Patch(facecolor='white', lw=2.4, edgecolor=color_cycle[x],
+                                      hatch='/////', label=tissue_type_long[x]) for x in range(8)]
+    
     else:
 
         for i, ax in enumerate(plot.patches):
@@ -66,7 +70,7 @@ def spectrum(data, mut_type, ax, fill=False, ymin=None, ymax=None, legend=True):
     plot.set_ylabel(string, fontsize=20)
     plot.tick_params(labelsize=18)
     plot.margins(x=.01)
-    plot.legend(handles=legend, ncol=4, fontsize=16, bbox_to_anchor=(.9, 1.2),
+    plot.legend(handles=legend, ncol=4, fontsize=22, bbox_to_anchor=(0.04, 1.2),
                 frameon=False)
 
     return plot
@@ -142,7 +146,8 @@ def Fig_2C(data, ax):
     plot = sns.barplot(x='Class', y='Estimate', hue='Tissue', data=ratio_df,
                 palette='bright', order=mut_type, ci='sd', edgecolor='black',
                 lw=1.5, ax=ax)
-    
+    plot.spines['left'].set_linewidth(2)
+
     sort_dict2 = {'C>T/G>A': 0, 'A>G/T>C': 1, 'C>A/G>T': 2, 'C>G/G>C': 3, 'A>T/T>A': 4, 'A>C/T>G': 5}
     resorted_df_list = []
     
@@ -169,7 +174,7 @@ def Fig_2C(data, ax):
     plot.errorbar(x=x_coords, y=resorted_df['Estimate'], yerr=lower,
                       fmt="none", c="black", capsize=4)
     
-    plot.legend(handles=legend, ncol=4, fontsize=16, bbox_to_anchor=(.1, 1),
+    plot.legend(handles=legend, ncol=4, fontsize=22, bbox_to_anchor=(.03, 1),
                     frameon=False)
     
     plot.set_ylabel("Fold Change w/Age ($log_2$ Scaled)", fontsize=18)

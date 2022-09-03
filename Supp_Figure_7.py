@@ -54,7 +54,7 @@ clone_freq_df.columns = ["MouseID", "Tissue", "Cohort", "Clone_Count",
 
 fig, ax = plt.subplots(ncols=1, constrained_layout=True, figsize=(15, 8))
 
-color_cycle = ['#ff9200', '#0433ff', '#932191', '#935200', '#008e00', 'gold']
+color_cycle = ['#377eb8', '#ff7f00', '#a65628', '#984ea3','#999999', 'gold']
 fc = ['#ffffff'] * 6 + color_cycle
 ec = color_cycle + ['#000000'] * 6
 

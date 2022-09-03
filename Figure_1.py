@@ -37,7 +37,10 @@ def mutation_bar(y, data, ax):
     plot = sns.barplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type_abbrev[: -1],
                        palette='bright', ci='sd', edgecolor='black', lw=1.2,
                        errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
-
+    
+    plot.spines['left'].set_linewidth(2)
+    plot.spines['bottom'].set_linewidth(2)
+    
     sns.stripplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type_abbrev[:-1],
                   dodge=True, ax=plot, alpha=0.7, color='black')
 
@@ -50,6 +53,7 @@ def mutation_bar(y, data, ax):
 
         if i < 8:
             ax.patches[i].set(lw=2.4)
+            ax.patches[i].set_hatch('/////')
 
     plt.setp(ax.get_yaxis().get_offset_text(), visible=False)
     ax.set_ylabel('Mutation Frequency($\mathregular{10^{-6}}$)', fontsize='xx-large')
@@ -58,7 +62,7 @@ def mutation_bar(y, data, ax):
     ax.tick_params('x', labelsize='x-large')
     ax.set_xticklabels(tissue_type_long, rotation=45, fontdict={'horizontalalignment': 'center'})
 
-    legend = [Patch.Patch(facecolor='white', edgecolor='black', label='Young'),
+    legend = [Patch.Patch(facecolor='white', edgecolor='black', label='Young', hatch='/////'),
               Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old')]
 
     ax.legend(handles=legend, fontsize='x-large')
@@ -137,8 +141,8 @@ if __name__ == '__main__':
 
     for i, j in enumerate(['B', 'C']):
         title = ['Young', 'Old']
-        axd[j].set_title(title[i], fontsize='xx-large')
-        axd2[j].set_title(title[i], fontsize='xx-large')
+        axd[j].set_title(title[i], fontsize=23)
+        axd2[j].set_title(title[i], fontsize=23)
 
     if not os.path.isdir("figures/"):
         os.mkdir("figures")

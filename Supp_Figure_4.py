@@ -11,12 +11,11 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as Patch
 import seaborn as sns
 from compile_data import summary_import
+color_cycle = ['#377eb8', '#ff7f00', '#a65628', '#984ea3','#999999', 'gold']
 
-fc = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff',
-      '#ff9200', '#0433ff', '#932191', '#935200', '#008e00', 'gold']
+fc = ['#ffffff'] * 6 + color_cycle
 
-ec = ['#ff9200', '#0433ff', '#932191', '#935200', '#008e00', 'gold', '#000000',
-      '#000000', '#000000', '#000000', '#000000', '#000000']
+ec = color_cycle + ['#000000'] * 6
 
 fig, ax = plt.subplots(ncols=1, constrained_layout=True, figsize=(15, 8))
 

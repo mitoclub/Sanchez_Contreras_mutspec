@@ -63,7 +63,7 @@ if __name__ == '__main__':
                 data=clone_data_long.query("Cohort=='Young'"),
                 hue_order=tissue_type_abbrev[: -1],
                 palette=color_cycle, facecolor='white', order=mut_type_names,
-                ci='sd', lw=1.5, errwidth=1.2, errcolor='black',
+                ci='sd', lw=2, errwidth=1.7, errcolor='black',
                 capsize=0.07, ax=ax[0])
 
     sns.despine(ax=ax[0])
@@ -72,7 +72,7 @@ if __name__ == '__main__':
                 data=clone_data_long.query("Cohort=='Old'"),
                 hue_order=tissue_type_abbrev[: -1], palette=color_cycle,
                 order=mut_type_names, ci='sd', edgecolor='black', lw=1.2,
-                errwidth=1.2, errcolor='black', capsize=0.07, ax=ax[1])
+                errwidth=1.7, errcolor='black', capsize=0.07, ax=ax[1])
 
     sns.despine(ax=ax[1])
 
@@ -80,15 +80,16 @@ if __name__ == '__main__':
                 data=clone_data_long.query("Cohort=='Old'"),
                 hue_order=tissue_type_abbrev[: -1], palette=color_cycle,
                 order=mut_type_names, edgecolor='black', ci='sd', lw=1,
-                errwidth=1.2, errcolor='black', capsize=0.07, ax=ax1ins)
+                errwidth=1.7, errcolor='black', capsize=0.07, ax=ax1ins)
 
     ec = zip(color_cycle, color_cycle, color_cycle, color_cycle, color_cycle, color_cycle)
     ec = list(itertools.chain.from_iterable(ec))
 
     for i in range(len(ax[0].patches)):
         ax[0].patches[i].set_edgecolor(ec[i])
-        legend0 = [Patch.Patch(facecolor='white', edgecolor=color_cycle[i],
-                               label=tissue_type_long[i]) for i in range(8)]
+        ax[0].patches[i].set_hatch('/////')
+        legend0 = [Patch.Patch(facecolor='white', edgecolor=color_cycle[i], hatch='/////',
+                               lw=2.4, label=tissue_type_long[i]) for i in range(8)]
 
         legend1 = [Patch.Patch(facecolor=color_cycle[i], edgecolor='black',
                                label=tissue_type_long[i]) for i in range(8)]
@@ -110,6 +111,13 @@ if __name__ == '__main__':
 
     ax[0].set_ylim(0, 0.0011)
     ax[1].set_ylim(0, 0.0125)
+    
+    ax[0].spines['left'].set_linewidth(2)
+    ax[1].spines['left'].set_linewidth(2)
+    
+    ax[0].spines['bottom'].set_linewidth(2)
+    ax[1].spines['bottom'].set_linewidth(2)
+    
 
     ax1ins.set_xticklabels(mut_type_pretty, fontsize=17, rotation=45)
 

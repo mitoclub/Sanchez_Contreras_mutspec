@@ -75,7 +75,8 @@ def plot_clone_numbers(x, y, hue, data, order, ax, ylim, xticklabels, xlabel, yl
                        ax=ax)
     
     sns.despine(ax=ax)
-    
+    ax.spines['left'].set_linewidth(2)
+    ax.spines['bottom'].set_linewidth(2)
     ax.set_xticklabels(xticklabels, rotation=45, fontsize=14)
     ax.tick_params('y', labelsize=14)
     ax.set_xlabel(xlabel, fontsize=16)
@@ -91,11 +92,15 @@ def plot_clone_numbers(x, y, hue, data, order, ax, ylim, xticklabels, xlabel, yl
 
         if i < len(fc) / 2:
             ax.patches[i].set(lw=2.4)
+            ax.patches[i].set_hatch('/////')
 
     if legend:
-        new_legend = [Patch.Patch(facecolor='white', edgecolor='black', label='Young'),
+        new_legend = [Patch.Patch(facecolor='white', edgecolor='black', hatch='/////', label='Young'),
                       Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old')]
-        ax.legend(handles=new_legend, fontsize='x-large', frameon=False, ncol=2, bbox_to_anchor=[0.5, 0.73, 0.5, 0.5])
+        
+        ax.legend(handles=new_legend, fontsize='xx-large', frameon=False, ncol=2, 
+                  bbox_to_anchor=[0.5, 0.73, 0.5, 0.5])
+        
     elif not legend:
         ax.legend_.remove()
     else:
@@ -152,6 +157,7 @@ def clone_plot(df, tissue, flat_file, ax):
     y.spines["left"].set_position(("axes", 0))
     y.yaxis.set_label_position('left')
     y.yaxis.set_ticks_position('left')
+    y.legend(ncol=2, fontsize='large', loc='upper left')
 
     return ax
 
@@ -200,6 +206,8 @@ if __name__ == "__main__":
                        legend=False)
     
     sns.despine(ax=axdins, top=False, right=False)
+    axdins.spines['left'].set_linewidth(1)
+    axdins.spines['bottom'].set_linewidth(1)
     
     sns.set_palette("tab10")
     

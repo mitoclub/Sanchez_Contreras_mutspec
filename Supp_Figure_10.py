@@ -27,7 +27,7 @@ data = data.query("Treatment!='perf' & Age=='Old' & Class=='Total_SNV_Freq'")
 fig, ax = plt.subplots(ncols=1, figsize=(12, 7))
 
 sns.barplot(x="Tissue", y="Frequency", hue="Treatment", data=data,
-            order=tissue_type_abbrev[: -1], palette='bright', ci='sd', edgecolor='black',
+            order=tissue_type_abbrev[: -1], ci='sd', edgecolor='white',
             lw=1.2, errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
 
 hatches = ['///', '---']
@@ -39,15 +39,15 @@ for x, bar in enumerate(ax.patches):
 
     if x in range(8, 16):
         bar.set_hatch(hatches[0])
-    elif x in range(16, 23):
+    elif x in range(16, 24):
         bar.set_hatch(hatches[1])
 
-patch1 = Patch.Patch(facecolor='white', edgecolor='black', label='Old')
+patch1 = Patch.Patch(facecolor='silver', edgecolor='white', label='Old')
 
-patch2 = Patch.Patch(facecolor='white', edgecolor='black', hatch=hatches[0],
+patch2 = Patch.Patch(facecolor='silver', edgecolor='white', hatch=hatches[0],
                      label='Old+Elam.')
 
-patch3 = Patch.Patch(facecolor='white', edgecolor='black', hatch=hatches[1],
+patch3 = Patch.Patch(facecolor='silver', edgecolor='white', hatch=hatches[1],
                      label='Old+NMN')
 
 legend = [patch1, patch2, patch3]
