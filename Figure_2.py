@@ -11,6 +11,7 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as Patch
+from matplotlib import ticker
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 from GlobalVars_ import tissue_type, tissue_type_long, mut_type, \
      mut_type_pretty, color_cycle, mut_type_conv, R_lib_path, tissue_type_abbrev
@@ -21,59 +22,67 @@ from compute_stats import heatmap_stats, Fig2C_stats
 
 def spectrum(data, mut_type, ax, fill=False, ymin=None, ymax=None, legend=True):
     
-    plot = sns.barplot(x='Class', y='Frequency', hue='Tissue', data=data,
-                       palette='colorblind', order=mut_type, ci='sd',
+    sns.barplot(x='Class', y='Frequency', hue='Tissue', data=data,
+                       order=mut_type, ci='sd',
                        edgecolor='black', lw=1.5, errwidth=1.5,
                        capsize=0.04, errcolor='black', ax=ax)
 
     sns.stripplot(x="Class", y="Frequency", hue="Tissue", data=data,
-                  order=mut_type, ax=plot, alpha=0.7, dodge=True, color='black')
+                  order=mut_type, ax=ax, alpha=0.7, dodge=True, color='black')
 
     sns.despine(ax=ax)
-    plot.spines['left'].set_linewidth(2)
-    plot.spines['bottom'].set_linewidth(2)
+    ax.spines['left'].set_linewidth(2)
+    ax.spines['bottom'].set_linewidth(2)
 
     if ymin is not None and ymax is not None:
-        plot.set_ylim(ymin, ymax)
-
+        ax.set_ylim(ymin, ymax)
+    
+    patch_list = []
+    
     if not fill:
-        for i, ax in enumerate(plot.patches):
+        for i, _ in enumerate(ax.patches):
 
             j = i // 6
-            plot.patches[i].set_facecolor('white')
-            plot.patches[i].set_edgecolor(color_cycle[j])
-            plot.patches[i].set(lw=2.4)
-            ax.set_hatch('/////')
+            ax.patches[i].set_facecolor(color_cycle[j])
+            r, g, b, a = ax.patches[i].get_facecolor()
+            ax.patches[i].set_facecolor((r, g, b, 0.15))  
+            ax.patches[i].set_edgecolor(color_cycle[j])
+            ax.patches[i].set(lw=2.4)
 
-            if legend:
-                legend = [Patch.Patch(facecolor='white', lw=2.4, edgecolor=color_cycle[x],
-                                      hatch='/////', label=tissue_type_long[x]) for x in range(8)]
+            if i % 6 == 0:
+                patch_list.append([r, g, b, 0.15])
+        
+        if legend:
+            legend = [Patch.Patch(facecolor=patch_list[x], lw=2.4, edgecolor=color_cycle[x],
+                                  label=tissue_type_long[x]) for x in range(8)]
+                
     
     else:
 
-        for i, ax in enumerate(plot.patches):
+        for i, _ in enumerate(ax.patches):
 
             j = i // 6
-            plot.patches[i].set_facecolor(color_cycle[j])
-            plot.patches[i].set_edgecolor('black')
+            ax.patches[i].set_facecolor(color_cycle[j])
+            ax.patches[i].set_edgecolor('black')
 
             if legend:
                 legend = [Patch.Patch(facecolor=color_cycle[x], edgecolor='black',
                                       label=tissue_type_long[x]) for x in range(8)]
 
     fig.canvas.draw()
-    plt.setp(plot.get_yaxis().get_offset_text(), visible=False)
-    order_of_mag = plot.get_yaxis().get_offset_text().get_text()[-2:]
+    plt.setp(ax.get_yaxis().get_offset_text(), visible=False)
+    order_of_mag = ax.get_yaxis().get_offset_text().get_text()[-2:]
     string = "Mutation Frequency ($\mathregular{10^{" + str(order_of_mag) + "}}$)"
-    plot.set_xticklabels(mut_type_pretty)
-    plot.set_xlabel('')
-    plot.set_ylabel(string, fontsize=20)
-    plot.tick_params(labelsize=18)
-    plot.margins(x=.01)
-    plot.legend(handles=legend, ncol=4, fontsize=22, bbox_to_anchor=(0.04, 1.2),
-                frameon=False)
+    ax.set_xticklabels(mut_type_pretty)
+    ax.set_xlabel('')
+    ax.set_ylabel(string, fontsize=20)
+    ax.tick_params(labelsize=18)
+    ax.margins(x=.01)
+    ax.legend(handles=legend, ncol=4, fontsize=22, bbox_to_anchor=(0.04, 1.2),
+                             frameon=False)
 
-    return plot
+
+    return ax
 
 
 def mod_ratios(mratios_file):
@@ -193,7 +202,7 @@ def Fig_2C_heatmap(data, mut_class, ax):
 
     sns.despine(top=False, right=False, ax=axd[subplot[i]])
 
-    plot.set_xticklabels(tissue_type_abbrev[:-1], fontsize=14)
+    plot.set_xticklabels(('K', '\nL', 'RC', '\nR', 'Hi', '\nC', 'M', '\nHe'), fontsize=16)
     plot.set_yticklabels('')
         
     return plot
@@ -300,12 +309,16 @@ if __name__ == '__main__':
         if subplot[i] != 'B':
             heatmap.set_yticklabels('')
             heatmap2.set_yticklabels('')
-            heatmap.tick_params(labelrotation=0, labelsize=14)
-            heatmap2.tick_params(labelrotation=0, labelsize=14)
+            heatmap.tick_params(labelrotation=0, labelsize=16)
+            heatmap.set_xticklabels(('K', '\nL', 'RC', '\nR', 'Hi', '\nC', 'M', '\nHe'))
+            heatmap2.tick_params(labelrotation=0, labelsize=16)
+            heatmap2.set_xticklabels(('K', '\nL', 'RC', '\nR', 'Hi', '\nC', 'M', '\nHe'))
+        
         else:
-            heatmap.tick_params(labelrotation=0, labelsize=14)
-            heatmap2.tick_params(labelrotation=0, labelsize=14)
-
+            heatmap.tick_params(labelrotation=0, labelsize=16)
+            heatmap.set_xticklabels(('K', '\nL', 'RC', '\nR', 'Hi', '\nC', 'M', '\nHe'))
+            heatmap2.tick_params(labelrotation=0, labelsize=16)
+            heatmap2.set_xticklabels(('K', '\nL', 'RC', '\nR', 'Hi', '\nC', 'M', '\nHe'))
 
     sns.heatmap(pd.DataFrame([4, 3, 2, 1, 0]), square=True, cbar=False,
                 cmap='rocket_r', vmin=0, vmax=10,

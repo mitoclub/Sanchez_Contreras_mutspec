@@ -28,9 +28,9 @@ fig, ax = plt.subplots(ncols=1, figsize=(12, 7))
 
 sns.barplot(x="Tissue", y="Frequency", hue="Treatment", data=data,
             order=tissue_type_abbrev[: -1], ci='sd', edgecolor='white',
-            lw=1.2, errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
+            lw=2.5, errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
 
-hatches = ['///', '---']
+hatches = ['///', '--']
 fig_color = color_cycle * 3
 
 for x, bar in enumerate(ax.patches):

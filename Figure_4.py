@@ -33,6 +33,65 @@ def setup_figure():
 
     return fig, ax, ax1ins
 
+def spectrum(data, mut_type, ax, fill=False, ymin=None, ymax=None, legend=True):
+    
+    sns.barplot(x='Class', y='Frequency', hue='Tissue', data=data,
+                       order=mut_type, ci='sd',
+                       edgecolor='black', lw=1.5, errwidth=1.7,
+                       capsize=0.07, errcolor='black', ax=ax)
+
+    sns.stripplot(x="Class", y="Frequency", hue="Tissue", data=data,
+                  order=mut_type, ax=ax, alpha=0.7, dodge=True, color='black')
+
+    ax.spines['left'].set_linewidth(2)
+    ax.spines['bottom'].set_linewidth(2)
+
+    if ymin is not None and ymax is not None:
+        ax.set_ylim(ymin, ymax)
+    
+    patch_list = []
+    
+    if not fill:
+        for i, _ in enumerate(ax.patches):
+
+            j = i // 6
+            ax.patches[i].set_facecolor(color_cycle[j])
+            r, g, b, a = ax.patches[i].get_facecolor()
+            ax.patches[i].set_facecolor((r, g, b, 0.15))  
+            ax.patches[i].set_edgecolor(color_cycle[j])
+            ax.patches[i].set(lw=2.4)
+
+            if i % 6 == 0:
+                patch_list.append([r, g, b, 0.15])
+        
+        if legend:
+            legend = [Patch.Patch(facecolor=patch_list[x], lw=2.4, edgecolor=color_cycle[x],
+                                  label=tissue_type_long[x]) for x in range(8)]
+                
+    
+    else:
+
+        for i, _ in enumerate(ax.patches):
+
+            j = i // 6
+            ax.patches[i].set_facecolor(color_cycle[j])
+            ax.patches[i].set_edgecolor('black')
+
+            if legend:
+                legend = [Patch.Patch(facecolor=color_cycle[x], edgecolor='black',
+                                      label=tissue_type_long[x]) for x in range(8)]
+
+    ax.set_xticklabels(mut_type_pretty)
+    ax.set_xlabel('')
+    ax.tick_params(labelsize=18)
+    ax.margins(x=.01)
+
+    ax.set_ylabel("Clone Frequency", fontsize=25)
+    ax.set_xlabel("")
+    ax.set_xticklabels(mut_type_pretty, rotation=45)
+    ax.tick_params(labelsize=22)
+
+    return ax, legend
 
 if __name__ == '__main__':
 
@@ -59,64 +118,27 @@ if __name__ == '__main__':
 
     fig, ax, ax1ins = setup_figure()
 
-    sns.barplot(x='Class', y='Frequency', hue='Tissue',
-                data=clone_data_long.query("Cohort=='Young'"),
-                hue_order=tissue_type_abbrev[: -1],
-                palette=color_cycle, facecolor='white', order=mut_type_names,
-                ci='sd', lw=2, errwidth=1.7, errcolor='black',
-                capsize=0.07, ax=ax[0])
+    plot_A, legend0 = spectrum(data=clone_data_long.query("Cohort=='Young'"), 
+                               mut_type=mut_type_names, ax=ax[0], fill=False)
 
+    plot_B, legend1 = spectrum(data=clone_data_long.query("Cohort=='Old'"), 
+                               mut_type=mut_type_names, ax=ax[1], fill=True)
+    
     sns.despine(ax=ax[0])
-
-    sns.barplot(x='Class', y='Frequency', hue='Tissue',
-                data=clone_data_long.query("Cohort=='Old'"),
-                hue_order=tissue_type_abbrev[: -1], palette=color_cycle,
-                order=mut_type_names, ci='sd', edgecolor='black', lw=1.2,
-                errwidth=1.7, errcolor='black', capsize=0.07, ax=ax[1])
-
     sns.despine(ax=ax[1])
 
-    sns.barplot(x='Class', y='Frequency', hue='Tissue',
-                data=clone_data_long.query("Cohort=='Old'"),
-                hue_order=tissue_type_abbrev[: -1], palette=color_cycle,
-                order=mut_type_names, edgecolor='black', ci='sd', lw=1,
-                errwidth=1.7, errcolor='black', capsize=0.07, ax=ax1ins)
+    plot_B_ins, _ = spectrum(data=clone_data_long.query("Cohort=='Old'"), 
+                                   mut_type=mut_type_names, ax=ax1ins, legend=False,
+                                   fill=True, ymin=0, ymax=0.0005)    
 
-    ec = zip(color_cycle, color_cycle, color_cycle, color_cycle, color_cycle, color_cycle)
-    ec = list(itertools.chain.from_iterable(ec))
-
-    for i in range(len(ax[0].patches)):
-        ax[0].patches[i].set_edgecolor(ec[i])
-        ax[0].patches[i].set_hatch('/////')
-        legend0 = [Patch.Patch(facecolor='white', edgecolor=color_cycle[i], hatch='/////',
-                               lw=2.4, label=tissue_type_long[i]) for i in range(8)]
-
-        legend1 = [Patch.Patch(facecolor=color_cycle[i], edgecolor='black',
-                               label=tissue_type_long[i]) for i in range(8)]
 
     ax[0].legend(handles=legend0, fontsize=22, ncol=4, bbox_to_anchor=[1.1, 1.2], frameon=False)
     ax[1].legend(handles=legend1, fontsize=22, ncol=4, bbox_to_anchor=[1.2, 1.2], frameon=False)
 
-    ax[0].set_ylabel("Clone Frequency", fontsize=22)
-    ax[1].set_ylabel("Clone Frequency", fontsize=22)
 
-    ax[0].set_xlabel("")
-    ax[1].set_xlabel("")
-
-    ax[0].set_xticklabels(mut_type_pretty, rotation=45)
-    ax[1].set_xticklabels(mut_type_pretty, rotation=45)
-
-    ax[0].tick_params(labelsize=22)
-    ax[1].tick_params(labelsize=22)
 
     ax[0].set_ylim(0, 0.0011)
     ax[1].set_ylim(0, 0.0125)
-    
-    ax[0].spines['left'].set_linewidth(2)
-    ax[1].spines['left'].set_linewidth(2)
-    
-    ax[0].spines['bottom'].set_linewidth(2)
-    ax[1].spines['bottom'].set_linewidth(2)
     
 
     ax1ins.set_xticklabels(mut_type_pretty, fontsize=17, rotation=45)

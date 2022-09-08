@@ -84,31 +84,31 @@ def plot_subplot_A(ax):
     ax.legend(handles=legend, title='Group')
     #color_cycle = ['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3',
     #           '#999999', '#e41a1c']
-    fc = ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#377eb8', '#FFFFFF', '#377eb8',
-          '#FFFFFF', '#ff7f00', '#ff7f00', '#FFFFFF', '#4daf4a', '#4daf4a',
-          '#FFFFFF', '#f781bf', '#f781bf', '#FFFFFF', '#a65628', '#a65628',
-          '#FFFFFF', '#984ea3', '#984ea3', '#FFFFFF', '#999999', '#999999',
-          '#FFFFFF', '#e41a1c', '#e41a1c'
-          ]
-
-    #fc = ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#ff9200', '#FFFFFF', '#ff9200',
-    #      '#FFFFFF', '#0433ff', '#0433ff', '#FFFFFF', '#ff84ff', '#ff84ff',
-    #      '#FFFFFF', '#76d5ff', '#76d5ff', '#FFFFFF', '#932191', '#932191',
-    #      '#FFFFFF', '#935200', '#935200', '#FFFFFF', '#008e00', '#008e00',
-    #      '#FFFFFF', '#ff2600', '#ff2600'
+    #fc = ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#377eb8', '#FFFFFF', '#377eb8',
+    #      '#FFFFFF', '#ff7f00', '#ff7f00', '#FFFFFF', '#4daf4a', '#4daf4a',
+    #      '#FFFFFF', '#f781bf', '#f781bf', '#FFFFFF', '#a65628', '#a65628',
+    #      '#FFFFFF', '#984ea3', '#984ea3', '#FFFFFF', '#999999', '#999999',
+    #      '#FFFFFF', '#e41a1c', '#e41a1c'
     #      ]
 
-    ec = ['black', '#377eb8', 'black', 'black', 'black', 'black', '#ff7f00',
-          'black', 'black', '#4daf4a', 'black', 'black', '#f781bf', 'black',
-          'black', '#a65628', 'black', 'black', '#984ea3', 'black', 'black',
-          '#999999', 'black', 'black', '#e41a1c', 'black', 'black'
+    fc = ['#FFFFFF', '#FFFFFF', '#FFFFFF', '#ff9200', '#FFFFFF', '#ff9200',
+          '#FFFFFF', '#0433ff', '#0433ff', '#FFFFFF', '#ff84ff', '#ff84ff',
+          '#FFFFFF', '#76d5ff', '#76d5ff', '#FFFFFF', '#932191', '#932191',
+          '#FFFFFF', '#935200', '#935200', '#FFFFFF', '#008e00', '#008e00',
+          '#FFFFFF', '#ff2600', '#ff2600'
           ]
+
+    #ec = ['black', '#377eb8', 'black', 'black', 'black', 'black', '#ff7f00',
+    #      'black', 'black', '#4daf4a', 'black', 'black', '#f781bf', 'black',
+    #      'black', '#a65628', 'black', 'black', '#984ea3', 'black', 'black',
+    #      '#999999', 'black', 'black', '#e41a1c', 'black', 'black'
+    #      ]
     
-    #ec = ['black', '#ff9200', 'black', 'black', 'black', 'black', '#0433ff',
-    #      'black', 'black', '#ff84ff', 'black', 'black', '#76d5ff', 'black',
-    #      'black', '#932191', 'black', 'black', '#935200', 'black', 'black',
-    #      '#008e00', 'black', 'black', '#ff2600', 'black', 'black'
-    #      ]
+    ec = ['black', '#ff9200', 'black', 'black', 'black', 'black', '#0433ff',
+          'black', 'black', '#ff84ff', 'black', 'black', '#76d5ff', 'black',
+          'black', '#932191', 'black', 'black', '#935200', 'black', 'black',
+          '#008e00', 'black', 'black', '#ff2600', 'black', 'black'
+          ]
 
     for i, bar in enumerate(ax.patches):
 

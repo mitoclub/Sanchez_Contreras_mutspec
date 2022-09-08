@@ -17,6 +17,7 @@ rule all:
         "figures/Supp_Figure_8.png",
         "figures/Supp_Figure_9.png",
         "figures/Supp_Figure_10.png",
+        "figures/Supp_Figure_12.png",
         
         "figures/Figure_1.pdf",
         "figures/Figure_2.pdf",
@@ -33,6 +34,7 @@ rule all:
         "figures/Supp_Figure_8.pdf",
         "figures/Supp_Figure_9.pdf",
         "figures/Supp_Figure_10.pdf",
+        "figures/Supp_Figure_12.pdf",
     
         "data/stats/Figure_1A_statistics.csv",
         "data/stats/Figure_1D_statistics.csv",
@@ -61,7 +63,7 @@ rule all:
         "data/imported_data/summary_data_wide.csv",
         "data/imported_data/summary_data_tidy.csv",
         "data/imported_data/mut_file_data.csv",
-        "data/imported_data/summary_clone_data.csv",
+        "data/imported_data/summary_clone_data.csv"
     output:
         temp(touch(".ruleAllFinished"))
 
@@ -326,4 +328,15 @@ rule Supplemental_Figure_10:
     shell:
         """
         python3 Supp_Figure_10.py
+        """
+
+rule Supplemental_Figure_12:
+    output:
+        "figures/Supp_Figure_12.pdf",
+        "figures/Supp_Figure_12.png"
+    conda:
+        "Mouse_mtDNA_analysis_env.yaml"
+    shell:
+        """
+        python3 Supp_Figure_12.py
         """

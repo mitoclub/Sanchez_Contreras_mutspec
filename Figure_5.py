@@ -8,6 +8,7 @@ Created on Fri Jul 15 07:59:17 2022
 import os
 import seaborn as sns
 import matplotlib.pyplot as plt
+from matplotlib import rcParams
 from mpl_toolkits.axes_grid1.inset_locator import inset_axes
 import pandas as pd
 from GlobalVars_ import mut_type, mut_type_pretty
@@ -24,7 +25,7 @@ def import_data():
     else:
         data = pd.read_csv("data/imported_data/summary_data_tidy.csv")
     
-    data = data.query("Treatment!='perf'& Age=='Old' & Tissue in ['K', 'M', 'He'] & \
+    data = data.query("Treatment!='perf'& Age=='Old' & Tissue in ['K', 'M', 'He', 'L'] & \
                        Class not in ['Total_SNV_Freq', 'Total_InDel_Freq']")
     
     return data
@@ -33,10 +34,10 @@ def import_data():
 def setup_figure():
     
     mosaic = '''AABB
-                .CC.'''
-                
+                CCDD'''
+    rcParams['axes.formatter.limits'] = (-4, 4)         
     fig = plt.figure(constrained_layout=True, figsize=(12, 8))
-    ax = fig.subplot_mosaic(mosaic, gridspec_kw=dict(hspace=0.1))
+    ax = fig.subplot_mosaic(mosaic, gridspec_kw=dict(hspace=0.1, wspace=0.15))
     subax = inset_axes(ax['A'], width="17%", height="40%", 
                        bbox_to_anchor=[-0.31, -0.15, 1, 1], bbox_transform=ax['A'].transAxes)
     
@@ -45,8 +46,10 @@ def setup_figure():
     ax['A'].set_title("Kidney", fontsize=20)
     ax['B'].set_ylim(0, 2.8e-6)
     ax['B'].set_title("Heart", fontsize=20)
-    ax['C'].set_ylim(0, 4e-6)
-    ax['C'].set_title("Sk. Muscle", fontsize=20)
+    ax['C'].set_ylim(0, 9e-6)
+    ax['C'].set_title("Liver", fontsize=20)
+    ax['D'].set_ylim(0, 4e-6)
+    ax['D'].set_title("Sk. Muscle", fontsize=20)
     
     return fig, ax, subax
 
@@ -55,18 +58,19 @@ if __name__ == '__main__':
     
     data = import_data()
     fig, ax, subax = setup_figure()
-    subplot_id = {0: 'A', 1: 'B', 2: 'C'}
+    subplot_id = {0: 'A', 1: 'B', 2: 'C', 3: 'D'}
     
-    for i, tissue in enumerate(['K', 'He', 'M']):
+    for i, tissue in enumerate(['K', 'He', 'L', 'M']):
         
         j = subplot_id[i]
         
         sns.barplot(x="Class", y="Frequency", hue="Treatment", 
                     data=data.query("Tissue==@tissue"), order=mut_type, ci='sd', 
-                    edgecolor='black', lw=1.5, errwidth=1.5, capsize=0.1, 
+                    edgecolor='white', lw=2, errwidth=1.5, capsize=0.1, 
                     errcolor='black', ax=ax[j])
         sns.despine(ax=ax[j])
-        
+        ax[j].spines['left'].set_linewidth(2)
+        ax[j].spines['bottom'].set_linewidth(2)
         ax[j].margins(y=0)
         fig.canvas.draw()
         plt.setp(ax[j].get_yaxis().get_offset_text(), visible=False)
@@ -78,9 +82,9 @@ if __name__ == '__main__':
         ax[j].tick_params(labelsize=14)
         ax[j].legend(fontsize=14)
         
-        hatches = ['///',  '---']
+        hatches = ['///',  '--']
         for x, bar in enumerate(ax[j].patches):
-            ax[j].patches[x].set_facecolor(('#ff9200', '#ff2600', '#008e00')[i])
+            ax[j].patches[x].set_facecolor(('#ff9200', '#ff2600', '#0433ff', '#008e00')[i])
             if x in range(6, 12):
                 bar.set_hatch(hatches[0])
             elif x in range(12, 18):
@@ -90,10 +94,10 @@ if __name__ == '__main__':
     sub_data = data.query("Tissue=='K' & Class=='C>G/G>C' & Treatment!='perf'")   
     
     sns.barplot(x='Class', y='Frequency', hue='Treatment', data=sub_data,
-                palette='bright', ci='sd', edgecolor='black', lw=1.5,
+                palette='bright', ci='sd', edgecolor='white', lw=1.5,
                 errwidth=1.5, capsize=0.04, errcolor='black', ax=subax)
     
-    hatches = ['///',  '---']
+    hatches = ['///',  '--']
     for x, bar in enumerate(subax.patches):
         subax.patches[x].set_facecolor('#ff9200')
         if x == 1:

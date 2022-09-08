@@ -30,30 +30,31 @@ def setup_figure():
     return fig, axd, axd2
 
 
-def mutation_bar(y, data, ax):
-    fc = ['white'] * 8 + color_cycle
-    ec = color_cycle + ['black'] * 8
+def mutation_bar(y, data, ax, alpha=1):
+    fc = color_cycle*2
 
-    plot = sns.barplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type_abbrev[: -1],
-                       palette='bright', ci='sd', edgecolor='black', lw=1.2,
-                       errwidth=1.5, capsize=0.1, errcolor='black', ax=ax)
+    sns.barplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type_abbrev[: -1],
+                       ci='sd', edgecolor='black', lw=1.2, errwidth=1.5, 
+                       capsize=0.1, errcolor='black', ax=ax)
     
-    plot.spines['left'].set_linewidth(2)
-    plot.spines['bottom'].set_linewidth(2)
+    ax.spines['left'].set_linewidth(2)
+    ax.spines['bottom'].set_linewidth(2)
     
     sns.stripplot(x="Tissue", y=y, hue="Age", data=data, order=tissue_type_abbrev[:-1],
-                  dodge=True, ax=plot, alpha=0.7, color='black')
+                  dodge=True, ax=ax, alpha=0.7, color='black')
 
-    sns.despine(ax=plot)
+    sns.despine(ax=ax)
 
     for i in range(16):
-
         ax.patches[i].set_facecolor(fc[i])
-        ax.patches[i].set_edgecolor(ec[i])
-
+        ax.patches[i].set_edgecolor('black')
+        
         if i < 8:
+            r, g, b, a = ax.patches[i].get_facecolor()
+            ax.patches[i].set_facecolor((r, g, b, .15))  
+            ax.patches[i].set_edgecolor((r, g, b, 1))
             ax.patches[i].set(lw=2.4)
-            ax.patches[i].set_hatch('/////')
+       
 
     plt.setp(ax.get_yaxis().get_offset_text(), visible=False)
     ax.set_ylabel('Mutation Frequency($\mathregular{10^{-6}}$)', fontsize='xx-large')
@@ -62,12 +63,12 @@ def mutation_bar(y, data, ax):
     ax.tick_params('x', labelsize='x-large')
     ax.set_xticklabels(tissue_type_long, rotation=45, fontdict={'horizontalalignment': 'center'})
 
-    legend = [Patch.Patch(facecolor='white', edgecolor='black', label='Young', hatch='/////'),
-              Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old')]
+    legend = [Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Young'),
+              Patch.Patch(facecolor='dimgrey', edgecolor='black', label='Old')]
 
     ax.legend(handles=legend, fontsize='x-large')
 
-    return plot
+    return ax
 
 
 def mod_heatmap(data, labels, ax):

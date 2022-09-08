@@ -85,18 +85,20 @@ def plot_clone_numbers(x, y, hue, data, order, ax, ylim, xticklabels, xlabel, yl
 
     if ylim is not None:
         ax.set_ylim(ylim[0], ylim[1])
-
-    for i in range(len(fc)):
+    
+    for i, _ in enumerate(ax.patches):
         ax.patches[i].set_facecolor(fc[i])
-        ax.patches[i].set_edgecolor(ec[i])
-
-        if i < len(fc) / 2:
+        ax.patches[i].set_edgecolor('black')
+        
+        if i < len(ax.patches)/2:
+            r, g, b, a = ax.patches[i].get_facecolor()
+            ax.patches[i].set_facecolor((r, g, b, .15))  
+            ax.patches[i].set_edgecolor((r, g, b, 1))
             ax.patches[i].set(lw=2.4)
-            ax.patches[i].set_hatch('/////')
-
+            
     if legend:
-        new_legend = [Patch.Patch(facecolor='white', edgecolor='black', hatch='/////', label='Young'),
-                      Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old')]
+        new_legend = [Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Young'),
+                      Patch.Patch(facecolor='dimgrey', edgecolor='black', label='Old')]
         
         ax.legend(handles=new_legend, fontsize='xx-large', frameon=False, ncol=2, 
                   bbox_to_anchor=[0.5, 0.73, 0.5, 0.5])
@@ -183,7 +185,7 @@ if __name__ == "__main__":
 
     fig, axd, axdins = setup_figure()
 
-    fc = ['white'] * 8 + color_cycle
+    fc = color_cycle * 2
     ec = color_cycle + ['black'] * 8
 
     plot_clone_numbers(x="Tissue", y="Clone_Freq", hue="Cohort",
@@ -202,7 +204,7 @@ if __name__ == "__main__":
     plot_clone_numbers(x="Tissue", y="Clone_Freq", hue="Cohort", data=sub_data,
                        order=tissue_type_abbrev[-4: -1], ylim=None, ax=axdins,
                        xlabel='', ylabel="", xticklabels=['', '', ''],
-                       fc=itemgetter(0, 1, 2, 13, 14, 15)(fc), ec=ec[5:11],
+                       fc=itemgetter(5, 6, 7, 13, 14, 15)(fc), ec=ec[5:11],
                        legend=False)
     
     sns.despine(ax=axdins, top=False, right=False)
@@ -219,8 +221,6 @@ if __name__ == "__main__":
 
         axd[subplot[i]].set_title(tissue_type_long[i], fontsize=20, y=1,
                                   backgroundcolor='white')
-
-    sns.set_palette('bright')
 
     if not os.path.isdir("figures"):
         os.mkdir("figures/")

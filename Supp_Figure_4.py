@@ -11,11 +11,11 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as Patch
 import seaborn as sns
 from compile_data import summary_import
-color_cycle = ['#377eb8', '#ff7f00', '#a65628', '#984ea3','#999999', 'gold']
+color_cycle = ['#ff9200', '#0433ff', '#932191', '#935200', '#008e00', 'gold']
 
-fc = ['#ffffff'] * 6 + color_cycle
+fc = color_cycle*2
 
-ec = color_cycle + ['#000000'] * 6
+#ec = color_cycle + ['#000000'] * 6
 
 fig, ax = plt.subplots(ncols=1, constrained_layout=True, figsize=(15, 8))
 
@@ -31,7 +31,7 @@ else:
 data = summary_data.query("Treatment in ['NT', 'perf'] & Age=='Old' & Tissue not in ['EC', 'R', 'He']")
 
 plot = sns.barplot(x="Tissue", y="Total_SNV_Freq", hue="Treatment", data=data,
-                   order=['K', 'L', 'Hi', 'C', 'M', 'B'], palette='bright',
+                   order=['K', 'L', 'Hi', 'C', 'M', 'B'],
                    ci='sd', edgecolor='black', lw=1.2, errwidth=1.5,
                    capsize=0.1, errcolor='black', ax=ax)
 
@@ -42,13 +42,16 @@ sns.stripplot(x="Tissue", y="Total_SNV_Freq", hue="Treatment", data=data,
 for i in range(12):
 
     plot.patches[i].set_facecolor(fc[i])
-    plot.patches[i].set_edgecolor(ec[i])
+    #plot.patches[i].set_edgecolor(ec[i])
 
     if i < 5:
+        r, g, b, a = plot.patches[i].get_facecolor()
+        plot.patches[i].set_facecolor((r, g, b, .15))  
+        plot.patches[i].set_edgecolor((r, g, b, 1))
         plot.patches[i].set(lw=2.4)
 
-    legend = [Patch.Patch(facecolor='white', edgecolor='black', label='Old'),
-              Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old Perfused')]
+    legend = [Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old'),
+              Patch.Patch(facecolor='dimgrey', edgecolor='black', label='Old Perfused')]
     plot.legend(handles=legend, fontsize='xx-large', loc='upper right')
 
 plot.set_ylabel("SNV Mutation Frequency ($\mathregular{10^{-6}}$)", fontsize=20)

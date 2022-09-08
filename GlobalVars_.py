@@ -21,9 +21,11 @@ tissue_type_abbrev = ('K', 'L', 'RC', 'R', 'Hi', 'C', 'M', 'He', 'B')
 tissue_type_long = ('Kidney', 'Liver',  'RPE/Chor.', 'Retina', 'Hippo.', 'Cerebel.', 'Sk. Muscle', 'Heart')
 
 #Other
-color_cycle = ['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3',
-               '#999999', '#e41a1c']
-#color_cycle = ['#ff9200', '#0433ff', '#ff84ff', '#76d5ff', '#932191', '#935200', '#008e00', '#ff2600']
+#color_cycle = ["#ff5e02", "#1845fb", "#c849a9", "#86c8dd", "#656364", "#578dff", "#adad7d", "#c91f16"]
+#color_cycle = ['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3',
+#               '#999999', '#e41a1c']
+#color_cycle = sns.color_palette("colorblind", 8).as_hex()
+color_cycle = ['#ff9200', '#0433ff', '#ff84ff', '#76d5ff', '#932191', '#935200', '#008e00', '#ff2600']
 mut_type = ['C>T/G>A', 'A>G/T>C', 'C>A/G>T', 'C>G/G>C','A>T/T>A', 'A>C/T>G']
 mut_type_pretty = ['G→A/C→T', 'A→G/T→C', 'G→T/C→A', 'G→C/C→G', 'A→T/T→A', 'A→C/T→G']
 mut_type_conv = {'C>T/G>A':'CT_GA', 'A>G/T>C':'AG_TC', 'C>A/G>T':'CA_GT', 'C>G/G>C':'CG_GC','A>T/T>A':'AT_TA','A>C/T>G':'AC_TG'}

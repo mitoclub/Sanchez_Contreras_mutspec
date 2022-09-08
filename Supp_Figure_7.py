@@ -54,12 +54,11 @@ clone_freq_df.columns = ["MouseID", "Tissue", "Cohort", "Clone_Count",
 
 fig, ax = plt.subplots(ncols=1, constrained_layout=True, figsize=(15, 8))
 
-color_cycle = ['#377eb8', '#ff7f00', '#a65628', '#984ea3','#999999', 'gold']
-fc = ['#ffffff'] * 6 + color_cycle
-ec = color_cycle + ['#000000'] * 6
+color_cycle = ['#ff9200', '#0433ff', '#932191', '#935200', '#008e00', 'gold']
+fc = color_cycle * 2
 
-sns.barplot(x='Tissue', y='Clone_Freq', hue='Cohort', data=clone_freq_df,
-            ci='sd', lw=1.2, errwidth=1.5, capsize=0.1, errcolor='black')
+plot = sns.barplot(x='Tissue', y='Clone_Freq', hue='Cohort', data=clone_freq_df,
+            ci='sd', lw=1.2, ec='black', errwidth=1.5, capsize=0.1, errcolor='black')
 
 sns.stripplot(x="Tissue", y="Clone_Freq", hue="Cohort", data=clone_freq_df,
               order=['K', 'L', 'Hi', 'C', 'M', 'B'], dodge=True, ax=ax,
@@ -67,16 +66,19 @@ sns.stripplot(x="Tissue", y="Clone_Freq", hue="Cohort", data=clone_freq_df,
 
 for i in range(12):
 
-    ax.patches[i].set_facecolor(fc[i])
-    ax.patches[i].set_edgecolor(ec[i])
+    plot.patches[i].set_facecolor(fc[i])
+    #plot.patches[i].set_edgecolor(ec[i])
 
     if i < 5:
-        ax.patches[i].set(lw=2.4)
+        r, g, b, a = plot.patches[i].get_facecolor()
+        plot.patches[i].set_facecolor((r, g, b, .15))  
+        plot.patches[i].set_edgecolor((r, g, b, 1))
+        plot.patches[i].set(lw=2.4)
 
-    legend = [Patch.Patch(facecolor='white', edgecolor='black', label='Old'),
-              Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old Perfused')]
-    ax.legend(handles=legend, fontsize='xx-large', loc='upper right')
-
+    legend = [Patch.Patch(facecolor='lightgrey', edgecolor='black', label='Old'),
+              Patch.Patch(facecolor='dimgrey', edgecolor='black', label='Old Perfused')]
+    plot.legend(handles=legend, fontsize='xx-large', loc='upper right')
+    
 ax.set_ylabel("Clone Frequency", fontsize=22)
 ax.set_xlabel("Tissue", fontsize=22)
 ax.set_xticklabels(['Kidney', 'Liver', 'Hippo.', 'Cerebel.', 'Sk. Muscle', 'Blood'],
