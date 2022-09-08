@@ -38,8 +38,8 @@ def setup_figure():
     rcParams['axes.formatter.limits'] = (-4, 4)         
     fig = plt.figure(constrained_layout=True, figsize=(12, 8))
     ax = fig.subplot_mosaic(mosaic, gridspec_kw=dict(hspace=0.1, wspace=0.15))
-    subax = inset_axes(ax['A'], width="17%", height="40%", 
-                       bbox_to_anchor=[-0.31, -0.15, 1, 1], bbox_transform=ax['A'].transAxes)
+    subax = inset_axes(ax['A'], width="30%", height="40%", 
+                       bbox_to_anchor=[-0.35, -0.05, 1, 1], bbox_transform=ax['A'].transAxes)
     
     subax.margins(y=0)
     ax['A'].set_ylim(0, 1.6e-5)
@@ -91,7 +91,7 @@ if __name__ == '__main__':
                 bar.set_hatch(hatches[1])
         ax[j].legend(markerscale=5, fontsize=16)        
 
-    sub_data = data.query("Tissue=='K' & Class=='C>G/G>C' & Treatment!='perf'")   
+    sub_data = data.query("Tissue=='K' & Class in ['C>A/G>T', 'C>G/G>C'] & Treatment!='perf'")   
     
     sns.barplot(x='Class', y='Frequency', hue='Treatment', data=sub_data,
                 palette='bright', ci='sd', edgecolor='white', lw=1.5,
@@ -111,10 +111,10 @@ if __name__ == '__main__':
     string = "Mut. Freq ($\mathregular{10^{" + str(order_of_mag) + "}}$)"
     subax.set_ylabel(string, fontsize=15)
     x = subax.get_xticklabels()
-    subax.set_xticklabels(['G→C/C→G'])
+    subax.set_xticklabels(['G→T/\nC→A', 'G→C/\nC→G'], fontsize=10)
     subax.set_xlabel('')
     subax.legend_.remove()
-    subax.set_ylim(0, 1.3e-6)
+    subax.set_ylim(0, 2e-6)
     subax.tick_params(labelsize=14)
     
     if not os.path.isdir('figures/'):
