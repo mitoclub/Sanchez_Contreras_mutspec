@@ -78,7 +78,7 @@ def mod_heatmap(data, labels, ax):
 
     sns.despine(left=True, bottom=True, ax=plot)
     plot.set_facecolor('silver')
-    plot.tick_params(labelsize=18)
+    plot.tick_params(labelsize=20, rotation=0)
 
     return plot
 
