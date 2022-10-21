@@ -13,9 +13,20 @@ for (f in filelist){
 }
 str(finalTable)
 
+length(unique(finalTable$sample)) #172
+length(filelist) #172
 file = read.csv("../Mouse_aging_mtDNA_summary.csv", header = TRUE)
-finalfinalTable = merge(finalTable, file, by=c("MouseID", "Treatment", "Tissue"), all = TRUE)
+file = file[,c(1,2)]
+file = unique(file)
 
-write.csv(finalfinalTable, file = "../MergedData.csv", row.names = F)
+final = merge(file, finalTable, by=c("MouseID"), all.y = TRUE)
+final = final[final$Tissue != "B",]
+final = final[final$Treatment != "PERF",]
+
+length(unique(final$MouseID))
+table(final$Age)
+
+
+write.csv(final, file = "../MergedData.csv", row.names = F)
 
 
